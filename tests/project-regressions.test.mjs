@@ -4,7 +4,7 @@ import test from 'node:test'
 import { URL } from 'node:url'
 
 const PNPM_PIN =
-  'pnpm@10.34.5+sha512.a4ee05f2f73658255bd6a89859c065a45c28a57daefae2c893a168ee2b73168c37b91e83e57ea67654ad03f03031746430e8bce38e362e042605fb8abc80192e'
+  'pnpm@11.14.0+sha512.66c1ac4c7d4762d6d7dde44c7f3e5a73591ed0a0806e751d4ed32d4f004f25b2285a906b1fd8a9e3e621df3b4e2858bf88e50e0cf626bedbe977fe434a5caf85'
 
 const readProjectFile = (path) =>
   readFile(new URL(`../${path}`, import.meta.url), 'utf8')
@@ -25,7 +25,11 @@ test('keeps the pnpm supply-chain protections enabled', async () => {
   const workspace = await readProjectFile('pnpm-workspace.yaml')
 
   assert.match(workspace, /^minimumReleaseAge:\s*10080\s*$/m)
+  assert.match(workspace, /^minimumReleaseAgeStrict:\s*true\s*$/m)
+  assert.match(workspace, /^minimumReleaseAgeIgnoreMissingTime:\s*false\s*$/m)
   assert.match(workspace, /^trustPolicy:\s*no-downgrade\s*$/m)
+  assert.match(workspace, /^\s+- 'semver@6\.3\.1'\s*$/m)
+  assert.match(workspace, /^trustLockfile:\s*false\s*$/m)
 })
 
 test('keeps contact controls large enough to avoid iOS focus zoom', async () => {

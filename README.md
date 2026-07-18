@@ -19,20 +19,22 @@ web app.
 ## Requisiti
 
 - **Node 24.18.0** (vedi `.nvmrc`: `nvm install && nvm use`)
-- [Corepack](https://nodejs.org/api/corepack.html), che usa automaticamente
-  **pnpm 10.34.5** dalla configurazione del progetto
+- [Corepack](https://nodejs.org/api/corepack.html), da attivare una volta con
+  `corepack enable`; il progetto usa **pnpm 11.14.0** con versione e integrità
+  bloccate in `package.json`
 
 ## Comandi
 
 ```bash
-pnpm install     # installa le dipendenze
-pnpm dev         # dev server su http://localhost:3000
-pnpm build       # build di produzione
-pnpm start       # avvia la build (dopo pnpm build)
-pnpm test        # test di regressione della configurazione
-pnpm typecheck   # controllo TypeScript senza generare file
-pnpm lint        # ESLint (incluso react-doctor)
-pnpm doctor      # analisi statica React Doctor
+corepack enable          # attiva i comandi del package manager
+corepack pnpm install     # installa le dipendenze
+corepack pnpm dev         # dev server su http://localhost:3000
+corepack pnpm build       # build di produzione
+corepack pnpm start       # avvia la build (dopo pnpm build)
+corepack pnpm test        # test di regressione della configurazione
+corepack pnpm typecheck   # controllo TypeScript senza generare file
+corepack pnpm lint        # ESLint (incluso react-doctor)
+corepack pnpm run doctor  # analisi statica React Doctor
 ```
 
 ## Struttura

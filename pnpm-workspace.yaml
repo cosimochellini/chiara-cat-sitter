@@ -6,4 +6,12 @@
 packages:
   - '.'
 minimumReleaseAge: 10080
+minimumReleaseAgeStrict: true
+minimumReleaseAgeIgnoreMissingTime: false
 trustPolicy: no-downgrade
+# Versione transitiva legacy di Babel, pubblicata prima dell'adozione stabile
+# della provenance; l'eccezione è limitata alla sola release richiesta.
+trustPolicyExclude:
+  - 'semver@6.3.1'
+# false fa verificare le policy anche quando l'installazione usa il lockfile.
+trustLockfile: false

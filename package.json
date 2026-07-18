@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.34.5+sha512.a4ee05f2f73658255bd6a89859c065a45c28a57daefae2c893a168ee2b73168c37b91e83e57ea67654ad03f03031746430e8bce38e362e042605fb8abc80192e",
+  "packageManager": "pnpm@11.14.0+sha512.66c1ac4c7d4762d6d7dde44c7f3e5a73591ed0a0806e751d4ed32d4f004f25b2285a906b1fd8a9e3e621df3b4e2858bf88e50e0cf626bedbe977fe434a5caf85",
   "engines": {
     "node": ">=24.11.0 <25"
   },
@@ -17,8 +17,8 @@
     "doctor": "react-doctor"
   },
   "dependencies": {
-    "@tanstack/react-router": "^1.170.18",
-    "@tanstack/react-start": "^1.168.30",
+    "@tanstack/react-router": "^1.170.17",
+    "@tanstack/react-start": "^1.168.27",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
@@ -33,11 +33,12 @@
     "@vitejs/plugin-react": "^6.0.3",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.7.0",
-    "eslint-plugin-react-doctor": "^0.8.1",
+    "eslint-plugin-react-doctor": "^0.7.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.7.0",
+    "react-doctor": "^0.7.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.64.0",
-    "vite": "^8.1.5"
+    "typescript-eslint": "^8.63.0",
+    "vite": "^8.1.4"
   }
 }
