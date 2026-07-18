@@ -18,8 +18,9 @@ web app.
 
 ## Requisiti
 
-- **Node ≥ 22.13** (vedi `.nvmrc`: `nvm use`)
-- pnpm
+- **Node 24.18.0** (vedi `.nvmrc`: `nvm install && nvm use`)
+- [Corepack](https://nodejs.org/api/corepack.html), che usa automaticamente
+  **pnpm 10.34.5** dalla configurazione del progetto
 
 ## Comandi
 
@@ -28,6 +29,8 @@ pnpm install     # installa le dipendenze
 pnpm dev         # dev server su http://localhost:3000
 pnpm build       # build di produzione
 pnpm start       # avvia la build (dopo pnpm build)
+pnpm test        # test di regressione della configurazione
+pnpm typecheck   # controllo TypeScript senza generare file
 pnpm lint        # ESLint (incluso react-doctor)
 pnpm doctor      # analisi statica React Doctor
 ```
