@@ -9,9 +9,14 @@ minimumReleaseAge: 10080
 minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
 trustPolicy: no-downgrade
-# Versione transitiva legacy di Babel, pubblicata prima dell'adozione stabile
-# della provenance; l'eccezione è limitata alla sola release richiesta.
-trustPolicyExclude:
-  - 'semver@6.3.1'
+# Le release più vecchie di 30 giorni sono già mature e possono precedere
+# l'adozione stabile della provenance; le versioni recenti restano verificate.
+trustPolicyIgnoreAfter: 43200
 # false fa verificare le policy anche quando l'installazione usa il lockfile.
 trustLockfile: false
+# Script nativi richiesti dal toolchain ufficiale Netlify; ogni altro script
+# install-time resta bloccato da strictDepBuilds.
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true

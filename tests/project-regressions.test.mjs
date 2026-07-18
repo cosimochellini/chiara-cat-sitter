@@ -3,8 +3,7 @@ import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 import { URL } from 'node:url'
 
-const PNPM_PIN =
-  'pnpm@11.11.0'
+const PNPM_PIN = 'pnpm@11.11.0'
 
 const readProjectFile = (path) =>
   readFile(new URL(`../${path}`, import.meta.url), 'utf8')
@@ -21,6 +20,27 @@ test('pins supported Node and pnpm versions', async () => {
   assert.equal(nvmrc.trim(), '24.18.0')
 })
 
+test('configures the official Netlify adapter and build output', async () => {
+  const [packageJsonSource, viteConfig, netlifyConfig] = await Promise.all([
+    readProjectFile('package.json'),
+    readProjectFile('vite.config.ts'),
+    readProjectFile('netlify.toml'),
+  ])
+  const packageJson = JSON.parse(packageJsonSource)
+
+  assert.equal(
+    packageJson.devDependencies['@netlify/vite-plugin-tanstack-start'],
+    '^1.3.16',
+  )
+  assert.match(
+    viteConfig,
+    /import netlify from '@netlify\/vite-plugin-tanstack-start'/,
+  )
+  assert.match(viteConfig, /tanstackStart\(\),\s*netlify\(\),/s)
+  assert.match(netlifyConfig, /^\s*command = "vite build"\s*$/m)
+  assert.match(netlifyConfig, /^\s*publish = "dist\/client"\s*$/m)
+})
+
 test('keeps the pnpm supply-chain protections enabled', async () => {
   const workspace = await readProjectFile('pnpm-workspace.yaml')
 
@@ -28,8 +48,11 @@ test('keeps the pnpm supply-chain protections enabled', async () => {
   assert.match(workspace, /^minimumReleaseAgeStrict:\s*true\s*$/m)
   assert.match(workspace, /^minimumReleaseAgeIgnoreMissingTime:\s*false\s*$/m)
   assert.match(workspace, /^trustPolicy:\s*no-downgrade\s*$/m)
-  assert.match(workspace, /^\s+- 'semver@6\.3\.1'\s*$/m)
+  assert.match(workspace, /^trustPolicyIgnoreAfter:\s*43200\s*$/m)
   assert.match(workspace, /^trustLockfile:\s*false\s*$/m)
+  assert.match(workspace, /^\s+'@parcel\/watcher':\s*true\s*$/m)
+  assert.match(workspace, /^\s+esbuild:\s*true\s*$/m)
+  assert.match(workspace, /^\s+sharp:\s*true\s*$/m)
 })
 
 test('keeps contact controls large enough to avoid iOS focus zoom', async () => {

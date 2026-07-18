@@ -34,6 +34,14 @@ pnpm lint        # ESLint (incluso react-doctor)
 pnpm run doctor  # analisi statica React Doctor
 ```
 
+## Deploy su Netlify
+
+Il progetto usa il plugin ufficiale Netlify per TanStack Start, con supporto a
+SSR, server routes e functions. Collegando questo repository a Netlify, le
+impostazioni versionate in `netlify.toml` eseguono la build Vite e pubblicano
+gli asset client da `dist/client`; il plugin prepara automaticamente la parte
+serverless.
+
 ## Struttura
 
 ```
