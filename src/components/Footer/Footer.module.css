@@ -1,0 +1,15 @@
+.footer {
+  text-align: center;
+  padding: 30px 20px 90px;
+  font-size: 13.5px;
+  color: var(--testo-tenue);
+}
+
+.line {
+  margin: 0;
+}
+
+.hint {
+  margin: 6px 0 0;
+  opacity: 0.8;
+}

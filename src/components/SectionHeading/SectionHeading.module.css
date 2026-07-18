@@ -1,0 +1,52 @@
+.head {
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rosa {
+  background: var(--rosa-chiara);
+  color: var(--rosa-deep);
+}
+.viola {
+  background: var(--viola-chiaro);
+  color: var(--viola-testo);
+}
+.biancoRosa {
+  background: #ffffff;
+  color: var(--rosa-deep);
+}
+.biancoVerde {
+  background: #ffffff;
+  color: var(--verde);
+}
+
+.title {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 800;
+  font-size: clamp(30px, 5vw, 42px);
+  color: var(--testo-scuro);
+  margin: 10px 0 0;
+}
+
+.titleRosa {
+  color: var(--rosa);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.8);
+}
+
+.subtitle {
+  margin: 8px auto 0;
+  max-width: 520px;
+  font-size: 16px;
+  color: var(--testo-morbido);
+}

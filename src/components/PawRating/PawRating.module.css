@@ -1,0 +1,21 @@
+.rating {
+  display: inline-flex;
+  gap: 7px;
+  justify-content: center;
+  align-items: center;
+  background: var(--rosa-pallido);
+  border: 1.5px solid var(--rosa-bordo);
+  border-radius: 999px;
+  padding: 7px 14px;
+  margin: 2px 0;
+}
+
+.pawFilled {
+  display: inline-flex;
+  transform: scale(0);
+}
+
+.pawEmpty {
+  display: inline-flex;
+  opacity: 0.6;
+}

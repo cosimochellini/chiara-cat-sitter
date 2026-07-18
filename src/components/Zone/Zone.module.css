@@ -1,0 +1,82 @@
+.section {
+  background: #fff1f5;
+  border-top: 3px dotted #f7c3d2;
+  border-bottom: 3px dotted #f7c3d2;
+  padding: 66px 20px 56px;
+  scroll-margin-top: 70px;
+}
+
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 10px auto 0;
+  max-width: 520px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--testo-morbido);
+}
+
+.mark {
+  background: #fff1d6;
+  border-radius: 8px;
+  padding: 1px 6px;
+  border-bottom: 2px dashed var(--oro);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #ffffff;
+  border: 2.5px solid;
+  border-radius: 999px;
+  padding: 11px 22px;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.zPink {
+  border-color: #f48fb0;
+  color: var(--rosa);
+  box-shadow: 0 6px 14px rgba(217, 58, 95, 0.14);
+}
+.zPurple {
+  border-color: #c9a6e8;
+  color: var(--viola);
+  box-shadow: 0 6px 14px rgba(155, 121, 188, 0.18);
+}
+.zGold {
+  border-color: #f7c86b;
+  color: #d9952b;
+  box-shadow: 0 6px 14px rgba(217, 149, 43, 0.16);
+}
+
+.note {
+  margin: 26px auto 0;
+  font-size: 14.5px;
+  color: var(--testo-tenue);
+}
+
+.note a {
+  font-weight: 700;
+}
+
+.pawRow {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+  margin-top: 26px;
+}

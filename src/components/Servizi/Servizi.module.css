@@ -1,0 +1,83 @@
+.section {
+  padding: 70px 20px;
+  scroll-margin-top: 70px;
+}
+
+.inner {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.headWrap {
+  margin-bottom: 36px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #ffffff;
+  border: 2px solid var(--rosa-chiara);
+  border-radius: 28px;
+  padding: 26px 22px;
+  box-shadow: 0 10px 26px rgba(217, 58, 95, 0.09);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.bRosa {
+  border-color: var(--rosa-chiara);
+}
+.bViola {
+  border-color: var(--viola-chiaro);
+}
+.bVerde {
+  border-color: var(--verde-chiaro);
+}
+
+.circle {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.cRosa {
+  background: var(--rosa-chiara);
+}
+.cViola {
+  background: var(--viola-chiaro);
+}
+.cVerde {
+  background: var(--verde-chiaro);
+}
+.cOro {
+  background: #fff1d6;
+}
+
+.title {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--testo-scuro);
+  margin: 0;
+}
+
+.desc {
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.revealCell {
+  display: flex;
+}

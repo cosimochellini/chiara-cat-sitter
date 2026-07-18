@@ -1,0 +1,9 @@
+# Hardening supply-chain (richiesto da react-doctor/require-pnpm-hardening):
+# - minimumReleaseAge: ritarda l'installazione di versioni pubblicate da meno di
+#   7 giorni (10080 minuti), il tempo perché eventuale malware venga individuato.
+# - trustPolicy no-downgrade: rifiuta pacchetti i cui segnali di fiducia
+#   (provenance, firme) peggiorano tra un aggiornamento e l'altro.
+packages:
+  - '.'
+minimumReleaseAge: 10080
+trustPolicy: no-downgrade
