@@ -19,7 +19,7 @@ web app.
 ## Requisiti
 
 - **Node 24.18.0** (vedi `.nvmrc`: `nvm install && nvm use`)
-- **pnpm 11.14.0 standalone**, fissato in `package.json`
+- **pnpm 11.11.0 standalone**, fissato in `package.json`
 
 ## Comandi
 

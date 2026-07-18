@@ -4,7 +4,7 @@ import test from 'node:test'
 import { URL } from 'node:url'
 
 const PNPM_PIN =
-  'pnpm@11.14.0'
+  'pnpm@11.11.0'
 
 const readProjectFile = (path) =>
   readFile(new URL(`../${path}`, import.meta.url), 'utf8')
