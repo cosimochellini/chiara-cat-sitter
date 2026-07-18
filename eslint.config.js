@@ -27,8 +27,8 @@ export default tseslint.config(
     plugins: {
       'react-hooks': reactHooks,
       // Register the react-doctor plugin once, then pull in both rule sets
-      // (the standalone plugin cannot run the project-level security-scan rules;
-      // for those use `pnpm doctor` -> `npx react-doctor@latest`).
+      // (the standalone plugin cannot run project-level security scans;
+      // for those use the pinned local CLI via `pnpm run doctor`).
       'react-doctor': reactDoctor,
     },
     rules: {
