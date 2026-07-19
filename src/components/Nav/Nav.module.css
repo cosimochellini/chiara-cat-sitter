@@ -52,3 +52,9 @@
   background: var(--rosa-scuro);
   color: #ffffff;
 }
+
+@media (max-width: 560px) {
+  .hideMobile {
+    display: none;
+  }
+}

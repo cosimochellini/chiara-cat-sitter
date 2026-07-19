@@ -55,3 +55,36 @@ test('disables smooth scrolling for reduced-motion users', async () => {
     /html\s*\{[^}]*scroll-behavior:\s*auto;/s,
   )
 })
+
+test('renders the mascot easter egg outside the scrollable navigation', async () => {
+  const nav = await readProjectFile('src/components/Nav/Nav.tsx')
+
+  assert.match(
+    nav,
+    /<\/nav>\s*\{nyanLayout && <NyanCat \{\.\.\.nyanLayout} onDone=\{hideNyan} \/>}\s*<\/>/s,
+  )
+})
+
+test('does not override the global reduced-motion policy in component styles', async () => {
+  const chiSonoStyles = await readProjectFile(
+    'src/components/ChiSono/ChiSono.module.css',
+  )
+
+  assert.doesNotMatch(
+    chiSonoStyles,
+    /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*!important/,
+  )
+})
+
+test('guards imperative badge motion and keeps the walking cat click-through', async () => {
+  const [chiSono, walkingCatStyles] = await Promise.all([
+    readProjectFile('src/components/ChiSono/ChiSono.tsx'),
+    readProjectFile('src/components/WalkingCat/WalkingCat.module.css'),
+  ])
+
+  assert.match(
+    chiSono,
+    /if \(!window\.matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches\) \{\s*target\.animate/s,
+  )
+  assert.doesNotMatch(walkingCatStyles, /pointer-events:\s*auto/)
+})
