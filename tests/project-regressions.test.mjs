@@ -78,3 +78,12 @@ test('disables smooth scrolling for reduced-motion users', async () => {
     /html\s*\{[^}]*scroll-behavior:\s*auto;/s,
   )
 })
+
+test('renders the mascot easter egg outside the scrollable navigation', async () => {
+  const nav = await readProjectFile('src/components/Nav/Nav.tsx')
+
+  assert.match(
+    nav,
+    /<\/nav>\s*\{nyanLayout && <NyanCat \{\.\.\.nyanLayout} onDone=\{hideNyan} \/>}\s*<\/>/s,
+  )
+})
