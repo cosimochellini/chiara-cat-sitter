@@ -269,6 +269,11 @@ export function useCatBehavior() {
 
     const onResize = () => {
       width = walker.offsetWidth || width
+      // Ri-clampa subito: negli stati fermi il tick non corregge la posizione.
+      if (x > maxX()) {
+        x = maxX()
+        walker.style.transform = `translate3d(${x}px, 0, 0)`
+      }
     }
 
     scheduleIdle()

@@ -109,7 +109,12 @@
   position: relative;
 }
 
-/* Solo il micio è interattivo (escluso da PawClickLayer via data-mascotte). */
+/*
+ * Solo il micio è interattivo (escluso da PawClickLayer via data-mascotte).
+ * Hit-area accurata alla sagoma: il button resta pointer-events: none e solo
+ * le forme SVG dipinte catturano i click, così i controlli della pagina
+ * restano cliccabili nei pixel trasparenti attorno al gatto.
+ */
 .cat {
   display: block;
   margin: 0;
@@ -117,17 +122,21 @@
   border: none;
   background: none;
   appearance: none;
-  pointer-events: auto;
+  pointer-events: none;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   touch-action: manipulation;
 }
+.cat .svg * {
+  pointer-events: visiblePainted;
+}
 .cat:focus {
   outline: none;
 }
 
-.cat.static {
+.cat.static,
+.cat.static .svg * {
   pointer-events: none;
   cursor: default;
 }
@@ -222,6 +231,8 @@
   transform-box: fill-box;
   transform-origin: 50% 50%;
   animation: kc-shadow 0.6s ease-in-out infinite;
+  /* l'ombra non fa parte della hit-area del micio */
+  pointer-events: none;
 }
 
 /* ---------- fumetto ---------- */
