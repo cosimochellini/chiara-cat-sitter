@@ -10,8 +10,10 @@ import appCss from '../styles/global.css?url'
 /** URL di produzione (senza slash finale): unica fonte per canonical/OG/sitemap. */
 export const SITE_URL = 'https://chiara-cat-sitter.netlify.app'
 
-const SITE_NAME = 'Chiara · Cat Sitter a Firenze'
-const TITLE = 'Chiara · Cat Sitter a Firenze'
+const SITE_NAME = 'Chiara · Cat Sitter'
+// Mantiene il claim del sito ("Cat Sitter Eccezionale", cfr. Hero H1) e aggiunge
+// la località per la SEO locale.
+const TITLE = 'Chiara · Cat Sitter Eccezionale a Firenze'
 const DESCRIPTION =
   'Chiara, cat sitter a Firenze: coccole professionali, croccantini puntuali, fusa garantite. Visite a domicilio, gioco, lettiera e medicine con dolcezza.'
 const OG_IMAGE = `${SITE_URL}/og-image.png`
