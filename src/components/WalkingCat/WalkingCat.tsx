@@ -101,12 +101,6 @@ export function WalkingCat() {
             <circle cx="126.2" cy="30.8" r="1" fill="#FFFFFF" opacity="0.85" />
           </g>
 
-          {/* occhi a cuore (hover) */}
-          <g className={styles.heartEyes}>
-            <path d="M114 32.4 l-3.6 -3.7 q-2.1 -2.2 0.1 -4 q1.9 -1.5 3.5 0.7 q1.6 -2.2 3.5 -0.7 q2.2 1.8 0.1 4 Z" fill="#D93A5F" />
-            <path d="M128 32.4 l-3.6 -3.7 q-2.1 -2.2 0.1 -4 q1.9 -1.5 3.5 0.7 q1.6 -2.2 3.5 -0.7 q2.2 1.8 0.1 4 Z" fill="#D93A5F" />
-          </g>
-
           {/* guance */}
           <ellipse cx="107" cy="37" rx="4.4" ry="2.9" fill="#FF9FB7" opacity="0.75" />
           <ellipse cx="135" cy="37" rx="4.4" ry="2.9" fill="#FF9FB7" opacity="0.75" />

@@ -75,3 +75,16 @@ test('does not override the global reduced-motion policy in component styles', a
     /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*!important/,
   )
 })
+
+test('guards imperative badge motion and keeps the walking cat click-through', async () => {
+  const [chiSono, walkingCatStyles] = await Promise.all([
+    readProjectFile('src/components/ChiSono/ChiSono.tsx'),
+    readProjectFile('src/components/WalkingCat/WalkingCat.module.css'),
+  ])
+
+  assert.match(
+    chiSono,
+    /if \(!window\.matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches\) \{\s*target\.animate/s,
+  )
+  assert.doesNotMatch(walkingCatStyles, /pointer-events:\s*auto/)
+})

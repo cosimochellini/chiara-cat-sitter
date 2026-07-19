@@ -160,15 +160,17 @@ export function ChiSono() {
     if (!card) return
 
     target.getAnimations().forEach((animation) => animation.cancel())
-    target.animate(
-      [
-        { transform: 'translateY(0) scale(1)' },
-        { transform: 'translateY(-7px) scale(1.07)', offset: 0.42 },
-        { transform: 'translateY(2px) scale(0.98)', offset: 0.72 },
-        { transform: 'translateY(0) scale(1)' },
-      ],
-      { duration: 520, easing: 'cubic-bezier(.34,1.56,.64,1)' },
-    )
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      target.animate(
+        [
+          { transform: 'translateY(0) scale(1)' },
+          { transform: 'translateY(-7px) scale(1.07)', offset: 0.42 },
+          { transform: 'translateY(2px) scale(0.98)', offset: 0.72 },
+          { transform: 'translateY(0) scale(1)' },
+        ],
+        { duration: 520, easing: 'cubic-bezier(.34,1.56,.64,1)' },
+      )
+    }
 
     const cardRect = card.getBoundingClientRect()
     const targetRect = target.getBoundingClientRect()
