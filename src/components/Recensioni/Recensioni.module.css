@@ -94,3 +94,44 @@
   font-size: 15px;
   line-height: 1.55;
 }
+
+/* Mobile: due colonne di polaroid invece di una, con testo/spaziatura ridotti */
+@media (max-width: 529px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 12px;
+  }
+  /* min-width:0 così le colonne 1fr si restringono davvero invece di fermarsi
+     alla min-content della card (che le teneva a ~205px, oltre il viewport) */
+  .cell,
+  .figure {
+    min-width: 0;
+  }
+  .section {
+    padding: 56px 14px;
+    /* Le polaroid ruotate sporgerebbero oltre il viewport a 2 colonne strette */
+    overflow-x: clip;
+  }
+  .figure {
+    padding: 10px 8px 14px;
+    /* Card dritte su mobile: la rotazione le farebbe uscire dalla griglia a 2 colonne */
+    transform: none;
+  }
+  .figure:hover {
+    transform: scale(1.02);
+  }
+  .name {
+    font-size: 18px;
+  }
+  .quote {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .breed {
+    font-size: 12px;
+  }
+  .tape {
+    width: 60px;
+    height: 20px;
+  }
+}
