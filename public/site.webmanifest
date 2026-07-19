@@ -1,0 +1,16 @@
+{
+  "name": "Chiara · Cat Sitter a Firenze",
+  "short_name": "Chiara",
+  "description": "Cat sitter a domicilio a Firenze: coccole professionali, croccantini puntuali, fusa garantite.",
+  "lang": "it",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FFF7F1",
+  "theme_color": "#FFD9E3",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
