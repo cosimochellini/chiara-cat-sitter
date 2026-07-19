@@ -50,6 +50,12 @@ const IDLE_JITTER_MS = 7000
 const CURSOR_LINGER_MS = 1500
 const TROT_COOLDOWN_MS = 6000
 const EDGE_PADDING = 8
+/*
+ * Distanza (px) tra centro del micio e cursore a cui il trotto si ferma:
+ * abbastanza vicino da essere tenero, abbastanza lontano che il corpo
+ * dipinto non finisca mai sotto il puntatore (non ruba i click).
+ */
+const TROT_ARRIVE_PX = 120
 
 const BUBBLE_TEXTS = ['Miao!', 'Prrr…', '♥'] as const
 
@@ -202,7 +208,7 @@ export function useCatBehavior() {
           // del gatto non può avvicinarsi oltre — evita il trotto infinito).
           const stuckAtEdge =
             (delta < 0 && x <= EDGE_PADDING + 1) || (delta > 0 && x >= maxX() - 1)
-          if (Math.abs(delta) <= 60 || stuckAtEdge) {
+          if (Math.abs(delta) <= TROT_ARRIVE_PX || stuckAtEdge) {
             trotCooldownUntil = performance.now() + TROT_COOLDOWN_MS
             enter('sit')
             later(backToWalk, TROT_SIT_MS)
@@ -242,11 +248,23 @@ export function useCatBehavior() {
         cat.style.setProperty('--look-y', '0')
       }
 
+      // Il puntatore è su un controllo della pagina: il micio non deve
+      // avvicinarsi né mettersi in mezzo (ruberebbe il click al controllo).
+      const overControl =
+        event.target instanceof Element &&
+        event.target.closest('a,button:not([data-mascotte]),input,textarea,select,label') !== null
+
       if (current === 'trot') {
+        if (overControl) {
+          trotCooldownUntil = performance.now() + TROT_COOLDOWN_MS
+          backToWalk()
+          return
+        }
         trotTarget = event.clientX
         return
       }
-      const nearForTrot = Math.abs(dx) < 220 && event.clientY > window.innerHeight * 0.45
+      const nearForTrot =
+        !overControl && Math.abs(dx) < 220 && event.clientY > window.innerHeight * 0.45
       if (!nearForTrot) {
         nearSince = null
         return
@@ -260,7 +278,7 @@ export function useCatBehavior() {
         now - nearSince > CURSOR_LINGER_MS &&
         now > trotCooldownUntil &&
         (current === 'walk' || current === 'sit') &&
-        Math.abs(dx) > 80
+        Math.abs(dx) > TROT_ARRIVE_PX
       ) {
         nearSince = null
         startTrot(event.clientX)
@@ -296,8 +314,8 @@ export function useCatBehavior() {
     catRef,
     state: reduced ? ('sit' as const) : state,
     bubble: reduced ? null : bubble,
-    hearts,
-    butterfly,
+    hearts: reduced ? [] : hearts,
+    butterfly: reduced ? null : butterfly,
     reduced,
     onCatClick,
   }
