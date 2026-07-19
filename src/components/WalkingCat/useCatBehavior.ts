@@ -236,7 +236,8 @@ export function useCatBehavior() {
 
     const onPointerMove = (event: PointerEvent) => {
       const center = x + width / 2
-      const catY = window.innerHeight - 50
+      // Centro verticale reale del micio (l'altezza cambia con la media query).
+      const catY = window.innerHeight - (cat.offsetHeight || 84) * 0.55
       const dx = event.clientX - center
       const dy = event.clientY - catY
       const distance = Math.hypot(dx, dy)

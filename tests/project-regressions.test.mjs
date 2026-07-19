@@ -88,7 +88,10 @@ test('guards imperative badge motion and keeps the walking cat container click-t
     /if \(!window\.matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches\) \{\s*target\.animate/s,
   )
   // Il contenitore full-width resta pointer-events: none (pagina cliccabile);
-  // solo la hit-area del micio è interattiva, esclusa da PawClickLayer.
+  // solo le forme SVG dipinte del micio sono interattive (visiblePainted),
+  // mai un box rettangolare pieno, e restano escluse da PawClickLayer.
   assert.match(walkingCatStyles, /\.walker\s*\{[^}]*pointer-events:\s*none/s)
+  assert.doesNotMatch(walkingCatStyles, /pointer-events:\s*auto/)
+  assert.match(walkingCatStyles, /pointer-events:\s*visiblePainted/)
   assert.match(walkingCat, /data-mascotte/)
 })
