@@ -145,6 +145,8 @@
   display: block;
   width: 126px;
   height: 84px;
+  /* Le orecchie nella posa seduta sforano il viewBox in alto: non tagliarle. */
+  overflow: visible;
 }
 
 /* ---------- parti animate ---------- */
