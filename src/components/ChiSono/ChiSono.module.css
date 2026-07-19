@@ -222,24 +222,3 @@ button.badge:focus-visible {
   background: var(--testo-scuro);
   transform: translateX(-50%) rotate(45deg);
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .track {
-    animation-duration: 32s !important;
-    animation-iteration-count: infinite !important;
-  }
-
-  .particle {
-    animation-duration: 760ms !important;
-    animation-iteration-count: 1 !important;
-  }
-
-  .bubble {
-    animation-duration: 220ms !important;
-    animation-iteration-count: 1 !important;
-  }
-
-  .badge {
-    transition-duration: 0.18s !important;
-  }
-}

@@ -87,3 +87,14 @@ test('renders the mascot easter egg outside the scrollable navigation', async ()
     /<\/nav>\s*\{nyanLayout && <NyanCat \{\.\.\.nyanLayout} onDone=\{hideNyan} \/>}\s*<\/>/s,
   )
 })
+
+test('does not override the global reduced-motion policy in component styles', async () => {
+  const chiSonoStyles = await readProjectFile(
+    'src/components/ChiSono/ChiSono.module.css',
+  )
+
+  assert.doesNotMatch(
+    chiSonoStyles,
+    /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*!important/,
+  )
+})
