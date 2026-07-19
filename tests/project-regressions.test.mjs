@@ -76,15 +76,19 @@ test('does not override the global reduced-motion policy in component styles', a
   )
 })
 
-test('guards imperative badge motion and keeps the walking cat click-through', async () => {
-  const [chiSono, walkingCatStyles] = await Promise.all([
+test('guards imperative badge motion and keeps the walking cat container click-through', async () => {
+  const [chiSono, walkingCatStyles, walkingCat] = await Promise.all([
     readProjectFile('src/components/ChiSono/ChiSono.tsx'),
     readProjectFile('src/components/WalkingCat/WalkingCat.module.css'),
+    readProjectFile('src/components/WalkingCat/WalkingCat.tsx'),
   ])
 
   assert.match(
     chiSono,
     /if \(!window\.matchMedia\('\(prefers-reduced-motion: reduce\)'\)\.matches\) \{\s*target\.animate/s,
   )
-  assert.doesNotMatch(walkingCatStyles, /pointer-events:\s*auto/)
+  // Il contenitore full-width resta pointer-events: none (pagina cliccabile);
+  // solo la hit-area del micio è interattiva, esclusa da PawClickLayer.
+  assert.match(walkingCatStyles, /\.walker\s*\{[^}]*pointer-events:\s*none/s)
+  assert.match(walkingCat, /data-mascotte/)
 })
