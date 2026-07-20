@@ -40,6 +40,123 @@ describe('Contatti', () => {
     expect(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' })).toBeEnabled()
   })
 
+  it('shows the "add another cat" button in the idle state', () => {
+    render(<Contatti />)
+
+    expect(
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
+    ).toBeVisible()
+  })
+
+  it('reveals an extra cat field when the add button is clicked', async () => {
+    const user = userEvent.setup()
+    render(<Contatti />)
+
+    await user.click(
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
+    )
+
+    expect(screen.getByLabelText('Il nome del secondo gatto')).toBeRequired()
+  })
+
+  it('caps the cats at five total and hides the add button', async () => {
+    const user = userEvent.setup()
+    render(<Contatti />)
+
+    const addBtn = () =>
+      screen.queryByRole('button', { name: 'Ho anche un altro micetto' })
+
+    for (let i = 0; i < 4; i++) {
+      await user.click(addBtn()!)
+    }
+
+    expect(screen.getByLabelText('Il nome del secondo gatto')).toBeVisible()
+    expect(screen.getByLabelText('Il nome del quinto gatto')).toBeVisible()
+    expect(addBtn()).not.toBeInTheDocument()
+  })
+
+  it('removes an extra cat field and brings the add button back', async () => {
+    const user = userEvent.setup()
+    render(<Contatti />)
+
+    for (let i = 0; i < 4; i++) {
+      await user.click(
+        screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
+      )
+    }
+
+    await user.click(screen.getByRole('button', { name: 'Rimuovi il secondo gatto' }))
+
+    expect(screen.queryByLabelText('Il nome del quinto gatto')).not.toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
+    ).toBeVisible()
+  })
+
+  it('submits the extra cat names in the payload', async () => {
+    const fetchMock = vi.fn(async () => ({ json: async () => ({ success: true }) }))
+    vi.stubGlobal('fetch', fetchMock)
+    const user = userEvent.setup()
+
+    render(<Contatti />)
+    await fillForm(user)
+    await user.click(
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
+    )
+    await user.type(screen.getByLabelText('Il nome del secondo gatto'), 'Briciola')
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
+
+    await screen.findByRole('status')
+    const [, init] = fetchMock.mock.calls[0] as unknown as [
+      string,
+      { body: FormData },
+    ]
+    expect(init.body.get('gatto')).toBe('Daisy')
+    expect(init.body.get('gatto2')).toBe('Briciola')
+  })
+
+  it('moves focus to the add button after removing an extra cat', async () => {
+    const user = userEvent.setup()
+    render(<Contatti />)
+
+    await user.click(screen.getByRole('button', { name: 'Ho anche un altro micetto' }))
+    await user.click(screen.getByRole('button', { name: 'Rimuovi il secondo gatto' }))
+
+    expect(screen.getByRole('button', { name: 'Ho anche un altro micetto' })).toHaveFocus()
+  })
+
+  it('re-indexes the payload contiguously after removing a middle cat', async () => {
+    const fetchMock = vi.fn(async () => ({ json: async () => ({ success: true }) }))
+    vi.stubGlobal('fetch', fetchMock)
+    const user = userEvent.setup()
+
+    render(<Contatti />)
+    await fillForm(user)
+
+    // Tre gatti extra: secondo, terzo, quarto.
+    for (let i = 0; i < 3; i++) {
+      await user.click(screen.getByRole('button', { name: 'Ho anche un altro micetto' }))
+    }
+    await user.type(screen.getByLabelText('Il nome del secondo gatto'), 'Briciola')
+    await user.type(screen.getByLabelText('Il nome del terzo gatto'), 'Oscar')
+    await user.type(screen.getByLabelText('Il nome del quarto gatto'), 'Misa')
+
+    // Rimuovo quello centrale: i valori superstiti restano (input keyed by id
+    // stabile) e i name si ricompattano su gatto2/gatto3.
+    await user.click(screen.getByRole('button', { name: 'Rimuovi il terzo gatto' }))
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
+
+    await screen.findByRole('status')
+    const [, init] = fetchMock.mock.calls[0] as unknown as [
+      string,
+      { body: FormData },
+    ]
+    expect(init.body.get('gatto')).toBe('Daisy')
+    expect(init.body.get('gatto2')).toBe('Briciola')
+    expect(init.body.get('gatto3')).toBe('Misa')
+    expect(init.body.get('gatto4')).toBeNull()
+  })
+
   it('logs an error and shows the error state when the access key is missing', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', '')
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})

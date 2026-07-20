@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Reveal } from '../Reveal'
 import { SectionHeading } from '../SectionHeading/SectionHeading'
@@ -10,9 +10,50 @@ const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
+// Unica fonte di verità per i gatti extra: ordinale (label/aria) + placeholder
+// nella stessa riga, così non possono disallinearsi. Il cap ne deriva.
+const GATTI_EXTRA = [
+  { ordinale: 'secondo', placeholder: 'es. Briciola' },
+  { ordinale: 'terzo', placeholder: 'es. Oscar' },
+  { ordinale: 'quarto', placeholder: 'es. Misa' },
+  { ordinale: 'quinto', placeholder: 'es. Kiki' },
+] as const
+const MAX_EXTRA_CATS = GATTI_EXTRA.length
+
 function ContactForm() {
   const purr = usePurr()
   const [status, setStatus] = useState<FormStatus>('idle')
+
+  // Gatti aggiuntivi: id monotòno via ref così le key React restano stabili
+  // anche dopo una rimozione (niente indici come key su una lista mutabile).
+  const nextCatId = useRef(0)
+  const [extraCats, setExtraCats] = useState<number[]>([])
+  const addCatRef = useRef<HTMLButtonElement>(null)
+  // Rimuovere una riga smonta l'elemento con il focus, che cadrebbe su <body>.
+  // Segnaliamo di spostare il focus sul bottone "aggiungi" dopo il re-render.
+  const focusAddAfterRemove = useRef(false)
+
+  const addCat = () => {
+    if (extraCats.length >= MAX_EXTRA_CATS) return
+    // Id generato nell'handler (non nell'updater) così setExtraCats resta puro:
+    // sotto StrictMode l'updater può girare due volte, l'handler no.
+    const id = nextCatId.current++
+    setExtraCats((prev) => [...prev, id])
+  }
+  const removeCat = (id: number) => {
+    focusAddAfterRemove.current = true
+    setExtraCats((prev) => prev.filter((catId) => catId !== id))
+  }
+
+  // Sincronizza il focus col DOM dopo una rimozione (sistema esterno: nessun
+  // valore da derivare nel render). Il bottone "aggiungi" è sempre presente
+  // dopo una rimozione perché il conteggio scende sotto il cap.
+  useEffect(() => {
+    if (focusAddAfterRemove.current) {
+      focusAddAfterRemove.current = false
+      addCatRef.current?.focus()
+    }
+  }, [extraCats])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -69,7 +110,10 @@ function ContactForm() {
           <button
             type="button"
             className={styles.resetBtn}
-            onClick={() => setStatus('idle')}
+            onClick={() => {
+              setStatus('idle')
+              setExtraCats([])
+            }}
           >
             Invia un altro messaggio
           </button>
@@ -110,6 +154,41 @@ function ContactForm() {
         Il nome del gatto (il vero cliente)
         <input className={styles.input} type="text" name="gatto" required placeholder="es. Daisy" />
       </label>
+
+      {extraCats.map((id, i) => (
+        <div className={styles.extraCat} key={id}>
+          <label className={styles.field}>
+            Il nome del {GATTI_EXTRA[i].ordinale} gatto
+            <input
+              className={styles.input}
+              type="text"
+              name={`gatto${i + 2}`}
+              required
+              placeholder={GATTI_EXTRA[i].placeholder}
+            />
+          </label>
+          <button
+            type="button"
+            className={styles.removeCatBtn}
+            onClick={() => removeCat(id)}
+            aria-label={`Rimuovi il ${GATTI_EXTRA[i].ordinale} gatto`}
+          >
+            ×
+          </button>
+        </div>
+      ))}
+
+      {extraCats.length < MAX_EXTRA_CATS && (
+        <button
+          type="button"
+          className={styles.addCatBtn}
+          onClick={addCat}
+          ref={addCatRef}
+        >
+          Ho anche un altro micetto
+        </button>
+      )}
+
       <label className={styles.field}>
         Messaggio
         <textarea
