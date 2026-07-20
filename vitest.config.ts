@@ -36,6 +36,7 @@ export default defineConfig({
         'src/components/svg/NyanCat.tsx',
         'src/components/Hero/**',
         'src/components/Servizi/**',
+        'src/components/Manifesto/**',
         'src/components/Zone/**',
         'src/components/Recensioni/**',
         'src/components/Footer/**',
