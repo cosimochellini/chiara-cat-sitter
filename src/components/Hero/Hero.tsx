@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react'
 import { CatFace } from '../svg/CatFace'
-import { ChiaraChibi } from '../svg/ChiaraChibi'
 import { usePurr } from '../../behaviors/usePurr'
 import { animations } from '../../config/animations'
 import styles from './Hero.module.css'
@@ -51,7 +50,15 @@ export function Hero() {
             feet
             bow={{ color: '#7ACB96', knot: '#4E9A6B', side: 'right' }}
           />
-          <ChiaraChibi className={styles.chibi} />
+          <img
+            className={styles.avatar}
+            src="/chiara.webp"
+            alt="Chiara, cat sitter, sorridente in giardino"
+            width={200}
+            height={200}
+            decoding="async"
+            fetchPriority="high"
+          />
           <CatFace
             className={styles.catRight}
             title="Gatto adorante"

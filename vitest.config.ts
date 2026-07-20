@@ -32,7 +32,6 @@ export default defineConfig({
         'src/components/ChiSono/**',
         // SVG puri e markup statico senza branching testabile.
         'src/components/svg/CatFace.tsx',
-        'src/components/svg/ChiaraChibi.tsx',
         'src/components/svg/NyanCat.tsx',
         'src/components/Hero/**',
         'src/components/Servizi/**',
