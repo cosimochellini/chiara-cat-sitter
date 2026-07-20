@@ -53,21 +53,24 @@ if (!('ResizeObserver' in window)) {
   })
 }
 
-// Web Animations API: jsdom non la implementa.
+// Web Animations API: jsdom non la implementa. Sono FUNZIONI SEMPLICI (non
+// vi.fn) di proposito: `mockReset: true` azzera l'implementazione dei vi.fn
+// prima di ogni test e i chiamanti che consumano il valore di ritorno
+// (`.cancel()`, iterazione su `getAnimations()`) riceverebbero `undefined`
+// dal secondo test in poi. Chi deve spiare usa `vi.spyOn(...)` nel test.
 if (!Element.prototype.animate) {
-  Element.prototype.animate = vi.fn(
-    () => ({ cancel: vi.fn(), finished: Promise.resolve() }) as unknown as Animation,
-  )
+  Element.prototype.animate = () =>
+    ({ cancel() {}, finished: Promise.resolve() }) as unknown as Animation
 }
 if (!Element.prototype.getAnimations) {
-  Element.prototype.getAnimations = vi.fn(() => [])
+  Element.prototype.getAnimations = () => []
 }
 
-// Altre API DOM assenti in jsdom usate dai componenti.
-Element.prototype.scrollIntoView = vi.fn()
+// Altre API DOM assenti in jsdom usate dai componenti (stesso motivo: plain).
+Element.prototype.scrollIntoView = () => {}
 if (!Element.prototype.setPointerCapture) {
-  Element.prototype.setPointerCapture = vi.fn()
-  Element.prototype.releasePointerCapture = vi.fn()
-  Element.prototype.hasPointerCapture = vi.fn(() => false)
+  Element.prototype.setPointerCapture = () => {}
+  Element.prototype.releasePointerCapture = () => {}
+  Element.prototype.hasPointerCapture = () => false
 }
 }

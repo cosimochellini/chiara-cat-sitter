@@ -20,20 +20,32 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'lcov'],
-      // Denominatore di coverage = solo i file con logica (decisione utente).
-      // Esclusi: macchina rAF, WAAPI, SVG puri, markup statico, generati, config.
-      include: [
-        'src/components/Contatti/Contatti.tsx',
-        'src/components/PawRating/PawRating.tsx',
-        'src/components/SectionHeading/SectionHeading.tsx',
-        'src/components/Nav/Nav.tsx',
-        'src/components/Reveal.tsx',
-        'src/components/svg/nyanLayout.ts',
-        'src/components/svg/PawIcon.tsx',
-        'src/behaviors/useMascotteEasterEgg.ts',
-        'src/behaviors/usePurr.ts',
-        'src/behaviors/useEarWiggle.ts',
-        'src/behaviors/PawClickLayer.tsx',
+      // include = glob ampio: ogni nuovo file sorgente entra nel denominatore
+      // (o va escluso esplicitamente qui sotto). Così il gate 80% protegge
+      // anche il codice futuro, invece di misurare solo i file già testati.
+      include: ['src/**/*.{ts,tsx}'],
+      // Escluso di proposito, con motivazione per file/gruppo:
+      exclude: [
+        // Codice guidato da requestAnimationFrame / Web Animations API:
+        // la logica è intrecciata a timing e DOM, test fragili e a basso valore.
+        'src/components/WalkingCat/**',
+        'src/components/ChiSono/**',
+        // SVG puri e markup statico senza branching testabile.
+        'src/components/svg/CatFace.tsx',
+        'src/components/svg/ChiaraChibi.tsx',
+        'src/components/svg/NyanCat.tsx',
+        'src/components/Hero/**',
+        'src/components/Servizi/**',
+        'src/components/Zone/**',
+        'src/components/Recensioni/**',
+        'src/components/Footer/**',
+        // Composizione/config/route: nessuna decisione da coprire.
+        'src/routes/**',
+        'src/router.tsx',
+        'src/config/**',
+        // Generati o dichiarazioni di tipo.
+        'src/routeTree.gen.ts',
+        'src/**/*.d.ts',
       ],
       thresholds: { lines: 80, branches: 80, functions: 80, statements: 80 },
     },

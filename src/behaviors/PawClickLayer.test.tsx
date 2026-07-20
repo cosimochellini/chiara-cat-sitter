@@ -90,6 +90,10 @@ describe('PawClickLayer', () => {
     pointerDownOn(surface)
 
     expect(document.querySelector(pawSelector)).toBeNull()
+
+    // Ripristina il registro dei moduli così il mock non filtra a eventuali
+    // test aggiunti dopo questo (l'isolamento non deve dipendere dall'ordine).
     vi.doUnmock('../config/animations')
+    vi.resetModules()
   })
 })

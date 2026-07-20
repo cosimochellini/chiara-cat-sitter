@@ -59,11 +59,16 @@ Asserzioni semantiche: `toBeVisible()`, `toBeDisabled()`, `toBeRequired()`,
 ### Coverage
 - Soglie **80% lines + 80% branches** (anche functions/statements) in
   `vitest.config.ts`, applicate da `pnpm test:coverage`.
-- Il **denominatore** è la lista `coverage.include`: solo i file con logica reale.
-  Esclusi di proposito animazioni/rAF (`WalkingCat`, `useCatBehavior`), WAAPI
-  (`ChiSono`), SVG puri, markup statico, file generati e config. Se un file
-  incluso non arriva all'80% a basso costo, restringi `include` invece di
-  scrivere test fragili sulle animazioni.
+- `coverage.include` è un glob ampio (`src/**/*.{ts,tsx}`): ogni nuovo file
+  entra automaticamente nel denominatore. Le esclusioni sono esplicite in
+  `coverage.exclude` con motivazione (animazioni/rAF, WAAPI, SVG puri, markup
+  statico, route/config, generati). Preferisci aggiungere test o un'esclusione
+  motivata piuttosto che test fragili sulle animazioni.
+- **Superficie non testata nota:** `src/components/WalkingCat/useCatBehavior.ts`
+  (macchina a stati rAF ~320 righe) è escluso e attualmente a 0% di coverage.
+  Molta della sua logica decisionale è intrecciata col timing di animazione; se
+  in futuro serve testarla, estrai prima gli helper puri (scelta idle, clamp dei
+  bordi, predicato "vicino per il trot") e includili nel gate.
 
 ### Prima di aprire una PR
 `pnpm lint && pnpm typecheck && pnpm test:coverage && pnpm build` devono passare.
