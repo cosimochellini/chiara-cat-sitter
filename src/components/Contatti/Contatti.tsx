@@ -34,6 +34,8 @@ function ContactForm() {
         method: 'POST',
         headers: { Accept: 'application/json' },
         body: formData,
+        // Evita che una connessione appesa lasci il form bloccato su "Invio…".
+        signal: AbortSignal.timeout(15000),
       })
       const data = await response.json()
       setStatus(data.success ? 'success' : 'error')
@@ -45,7 +47,7 @@ function ContactForm() {
   if (status === 'success') {
     return (
       <div className={styles.form}>
-        <div className={styles.success}>
+        <div className={styles.success} role="status" aria-live="polite">
           <CatFace
             title="Gatto felice"
             size={92}
