@@ -167,6 +167,23 @@ describe('project regressions (static source guards)', () => {
     }
   })
 
+  it('ships a photo in public/reviews for every review id', async () => {
+    const source = await readProjectFile(
+      'src/components/Recensioni/Recensioni.tsx',
+    )
+    // La src dell'immagine è derivata da `/reviews/${review.id}.webp`, quindi
+    // ogni id deve avere il file corrispondente o si spedisce un 404 silenzioso.
+    const ids = [...source.matchAll(/id:\s*'([^']+)'/g)].map((m) => m[1])
+
+    expect(ids.length).toBeGreaterThanOrEqual(7)
+    for (const id of ids) {
+      expect(
+        await projectFileExists(`public/reviews/${id}.webp`),
+        `manca public/reviews/${id}.webp per la recensione "${id}"`,
+      ).toBe(true)
+    }
+  })
+
   it('points robots.txt and sitemap.xml at the production host', async () => {
     const [robots, sitemap, manifest] = await Promise.all([
       readProjectFile('public/robots.txt'),
