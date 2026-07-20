@@ -108,7 +108,7 @@ function ContactForm() {
       </label>
       <label className={styles.field}>
         Il nome del gatto (il vero cliente)
-        <input className={styles.input} type="text" name="gatto" required placeholder="es. Polpetta" />
+        <input className={styles.input} type="text" name="gatto" required placeholder="es. Daisy" />
       </label>
       <label className={styles.field}>
         Messaggio
@@ -139,7 +139,7 @@ function ContactForm() {
         onMouseEnter={purr}
         disabled={sending}
       >
-        {sending ? 'Invio… 🐾' : 'Manda un miao 🐾'}
+        {sending ? 'Invio… 🐾' : 'Inviami il messaggio 🐾'}
       </button>
 
       {status === 'error' && (

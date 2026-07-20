@@ -10,7 +10,7 @@ async function fillForm(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText('Il tuo nome'), 'Martina')
   await user.type(screen.getByLabelText('La tua email'), 'martina@esempio.it')
   await user.type(screen.getByLabelText('Il tuo telefono'), '333 123 4567')
-  await user.type(screen.getByLabelText('Il nome del gatto (il vero cliente)'), 'Polpetta')
+  await user.type(screen.getByLabelText('Il nome del gatto (il vero cliente)'), 'Daisy')
   await user.type(screen.getByLabelText('Messaggio'), 'Ciao!')
 }
 
@@ -37,7 +37,7 @@ describe('Contatti', () => {
     expect(screen.getByLabelText('Il tuo telefono')).toBeRequired()
     expect(screen.getByLabelText('Il nome del gatto (il vero cliente)')).toBeRequired()
     expect(screen.getByLabelText('Messaggio')).toBeRequired()
-    expect(screen.getByRole('button', { name: 'Manda un miao 🐾' })).toBeEnabled()
+    expect(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' })).toBeEnabled()
   })
 
   it('logs an error and shows the error state when the access key is missing', async () => {
@@ -49,7 +49,7 @@ describe('Contatti', () => {
 
     render(<Contatti />)
     await fillForm(user)
-    await user.click(screen.getByRole('button', { name: 'Manda un miao 🐾' }))
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
 
     expect(await screen.findByRole('alert')).toBeVisible()
     expect(fetchMock).not.toHaveBeenCalled()
@@ -66,7 +66,7 @@ describe('Contatti', () => {
 
     render(<Contatti />)
     await fillForm(user)
-    await user.click(screen.getByRole('button', { name: 'Manda un miao 🐾' }))
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
 
     const sendingBtn = await screen.findByRole('button', { name: 'Invio… 🐾' })
     expect(sendingBtn).toBeDisabled()
@@ -82,7 +82,7 @@ describe('Contatti', () => {
 
     render(<Contatti />)
     await fillForm(user)
-    await user.click(screen.getByRole('button', { name: 'Manda un miao 🐾' }))
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
 
     const status = await screen.findByRole('status')
     expect(status).toHaveTextContent('Miao ricevuto!')
@@ -99,7 +99,7 @@ describe('Contatti', () => {
 
     // Il reset riporta al form.
     await user.click(screen.getByRole('button', { name: 'Invia un altro messaggio' }))
-    expect(screen.getByRole('button', { name: 'Manda un miao 🐾' })).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' })).toBeVisible()
   })
 
   it('shows the error state when Web3Forms reports failure', async () => {
@@ -109,7 +109,7 @@ describe('Contatti', () => {
 
     render(<Contatti />)
     await fillForm(user)
-    await user.click(screen.getByRole('button', { name: 'Manda un miao 🐾' }))
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('il miao non è partito')
   })
@@ -123,7 +123,7 @@ describe('Contatti', () => {
 
     render(<Contatti />)
     await fillForm(user)
-    await user.click(screen.getByRole('button', { name: 'Manda un miao 🐾' }))
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
 
     await waitFor(() => expect(screen.getByRole('alert')).toBeVisible())
   })
