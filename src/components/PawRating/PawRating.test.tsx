@@ -44,6 +44,9 @@ describe('PawRating', () => {
   })
 
   afterEach(() => {
+    // Ripristina i timer reali anche se un test fallisce a metà, così i fake
+    // timer non filtrano al test successivo.
+    vi.useRealTimers()
     vi.restoreAllMocks()
   })
 
@@ -70,8 +73,6 @@ describe('PawRating', () => {
     const paws = container.querySelectorAll<HTMLElement>('[data-paw]')
     paws.forEach((paw) => expect(paw.style.animation).toContain('om-pop'))
     expect(instances[0].unobserve).toHaveBeenCalledOnce()
-
-    vi.useRealTimers()
   })
 
   it('reveals paws immediately when reduced motion is preferred', () => {
