@@ -137,7 +137,7 @@ export function Recensioni() {
                   <img
                     className={styles.photoImg}
                     src={`/reviews/${review.id}.webp`}
-                    alt={`${review.name}, ${review.breed}`}
+                    alt={`Foto di ${review.name}`}
                     width={480}
                     height={480}
                     loading="lazy"
