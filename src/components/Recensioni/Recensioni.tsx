@@ -2,12 +2,7 @@ import type { CSSProperties } from 'react'
 import { Reveal } from '../Reveal'
 import { SectionHeading } from '../SectionHeading/SectionHeading'
 import { PawRating } from '../PawRating/PawRating'
-import { CatFace } from '../svg/CatFace'
-import { useEarWiggle } from '../../behaviors/useEarWiggle'
 import styles from './Recensioni.module.css'
-
-type CatProps = Parameters<typeof CatFace>[0]
-type CatConfig = Omit<CatProps, 'title' | 'earWiggle' | 'className' | 'size'>
 
 type Review = {
   id: string
@@ -19,87 +14,80 @@ type Review = {
   tapeColor: string
   tapeRot: number
   cardRot: number
-  cat: CatConfig
 }
 
 const REVIEWS: Review[] = [
   {
     id: 'daisy',
     name: 'Daisy',
-    breed: 'europea tigrata, critica gastronomica',
-    rating: 5,
+    breed: 'rossa tigrata, sorella chiacchierona',
+    rating: 4,
     quote:
-      '«Tecnica di apertura scatolette impeccabile. Grattini dietro le orecchie a livello olimpico. La riassumerei anche subito.»',
+      'l’unica sorella simpatica (Trudy non la sopporto). con lei chiacchieriamo di tante cose e abbiamo i nostri rituali personali. 4 zampette perchè non le perdono di essere andata a vivere da sola',
     photoBg: '#FFE3EA',
     tapeColor: 'rgba(181,232,181,0.8)',
     tapeRot: -4,
     cardRot: -2,
-    cat: { fur: '#EFBE8A', eyes: 'open', stripes: true, stripeColor: '#C98D4B', whiskers: true, feet: true, accessory: 'heartbib', accessoryColor: '#D93A5F' },
   },
   {
     id: 'trudy',
     name: 'Trudy',
-    breed: 'persiana, di sangue reale',
-    rating: 5,
+    breed: 'tigrata, la sorellona maestosa',
+    rating: 4,
     quote:
-      '«Finalmente un’umana che capisce che vado spazzolata OGNI giorno. Servizio degno del mio rango. Approvata dalla corona.»',
+      'la mia sorellona, con lei sbavo dalle fusa che faccio ogni volta che la vedo. 4 zampette perchè non le perdono di essere andata a vivere da sola',
     photoBg: '#EFE3FA',
     tapeColor: 'rgba(255,183,197,0.85)',
     tapeRot: 3,
     cardRot: 1.5,
-    cat: { fur: '#FFFDFB', eyes: 'open', whiskers: true, feet: true, accessory: 'crown', accessoryColor: '#F7C86B' },
   },
   {
     id: 'briciola',
     name: 'Briciola',
-    breed: 'nera, ex randagia di quartiere',
+    breed: 'tigrata, veterana ammorbidita',
     rating: 5,
     quote:
-      '«Io odio tutti. Lei no. Non so spiegarmelo e la cosa mi turba profondamente.»',
+      'Soffiavo sempre a tutti ma con la Chiara mi sono abituata ad andare d’accordo anche con gli umani diversi da babbo mamma e Franci. O forse è stata solo la vecchiaia?',
     photoBg: '#D8F3E7',
     tapeColor: 'rgba(201,166,232,0.7)',
     tapeRot: -5,
     cardRot: -1.2,
-    cat: { fur: '#5A525E', stroke: '#332D36', eyes: 'slit', whiskers: true, whiskerColor: '#A79FB0', feet: true },
   },
   {
     id: 'oscar',
     name: 'Oscar',
-    breed: 'rosso, esperto di pisolini',
+    breed: 'bianco e tigrato, primo amore',
     rating: 5,
     quote:
-      '«Puntualissima con la pappa. Ho provato a convincerla che mangio sei volte al giorno: non ci è cascata. Rispetto.»',
+      'Chiara è stata la mia prima cotta, ma col tempo siamo diventati amici di pappa e di giochi. Corse per la casa ovunqueeee',
     photoBg: '#FFF1D6',
     tapeColor: 'rgba(175,211,234,0.85)',
     tapeRot: 4,
     cardRot: 2,
-    cat: { fur: '#F2A65A', eyes: 'closed', stripes: true, stripeColor: '#D97F2E', whiskers: true, feet: true, accessory: 'bandana', accessoryColor: '#7ACB96' },
   },
   {
     id: 'misa',
     name: 'Misa',
-    breed: 'siamese, opinionista',
-    rating: 4,
+    breed: 'crema soffice, adolescente',
+    rating: 5,
     quote:
-      '«Tutto perfetto, ma una zampetta in meno perché a fine servizio è tornata a casa SUA. Inaccettabile.»',
+      'quando ero solo una pallina bianca di pelo e i miei erano a lavoro, c’era la Chiara a tenermi compagnia. Oggi sono cresciuta e come ogni adolescente non sono più disposta a stare ore a farmi grattare il pancino. Certo che però 5 minuti....',
     photoBg: '#FFE3EA',
     tapeColor: 'rgba(247,200,107,0.7)',
     tapeRot: -3,
     cardRot: -1.8,
-    cat: { fur: '#8A6A4F', earInner: '#C9A176', faceFill: '#F7EBD7', muzzle: '#E3CBA4', eyes: 'glasses', whiskers: true, feet: true },
   },
   {
     id: 'kiki',
     name: 'Kiki',
-    breed: 'gattina timida, esperta di sotto-divani',
+    breed: 'nera, ospite lampo',
     rating: 5,
     quote:
-      '«Sono uscita dal mio nascondiglio dopo dieci minuti. Record mondiale. Ha il laser buono.»',
+      'Tecnica di apertura scatolette impeccabile. Grattini dietro le orecchie a livello olimpico. La riassumerei anche subito, peccato siano stati solo pochi giorni',
     photoBg: '#EFE3FA',
     tapeColor: 'rgba(181,232,181,0.8)',
     tapeRot: 5,
     cardRot: 1.2,
-    cat: { fur: '#CFC5DF', eyes: 'open', whiskers: true, feet: true, accessory: 'sparkles' },
   },
   {
     id: 'casimiro',
@@ -107,18 +95,15 @@ const REVIEWS: Review[] = [
     breed: 'soriano, atleta professionista',
     rating: 5,
     quote:
-      '«Lanci di pallina di una precisione commovente. Sessioni laser da standing ovation. Il mio allenatore di fiducia.»',
+      'Lanci di pallina di una precisione commovente. Sessioni laser da standing ovation. Il mio allenatore di fiducia.',
     photoBg: '#D8F3E7',
     tapeColor: 'rgba(255,183,197,0.85)',
     tapeRot: -4,
     cardRot: -2.2,
-    cat: { fur: '#CE9463', eyes: 'open', whiskers: true, feet: true, accessory: 'sportband', accessoryColor: '#7ACB96' },
   },
 ]
 
 export function Recensioni() {
-  const onEarWiggle = useEarWiggle()
-
   return (
     <section id="recensioni" className={styles.section}>
       <div className={styles.inner}>
@@ -136,7 +121,6 @@ export function Recensioni() {
               <figure
                 className={styles.figure}
                 style={{ '--rot': `${review.cardRot}deg` } as CSSProperties}
-                onMouseEnter={onEarWiggle}
               >
                 <span
                   aria-hidden="true"
@@ -150,11 +134,14 @@ export function Recensioni() {
                 />
                 <span className={styles.name}>{review.name}</span>
                 <div className={styles.photo} style={{ background: review.photoBg }}>
-                  <CatFace
-                    {...review.cat}
-                    title={review.name}
-                    earWiggle
-                    className={styles.catImg}
+                  <img
+                    className={styles.photoImg}
+                    src={`/reviews/${review.id}.webp`}
+                    alt={`${review.name}, ${review.breed}`}
+                    width={480}
+                    height={480}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <figcaption className={styles.caption}>
