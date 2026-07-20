@@ -3,11 +3,7 @@
   gap: 7px;
   justify-content: center;
   align-items: center;
-  background: var(--rosa-pallido);
-  border: 1.5px solid var(--rosa-bordo);
-  border-radius: 999px;
   padding: 7px 14px;
-  margin: 2px 0;
 }
 
 .pawFilled {

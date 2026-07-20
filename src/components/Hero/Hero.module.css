@@ -34,9 +34,15 @@
   transform: translate(16px, -6px) rotate(-8deg);
 }
 
-.chibi {
+.avatar {
   position: relative;
   z-index: 1;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #ffffff;
+  box-shadow: 0 12px 30px rgba(217, 58, 95, 0.28);
 }
 
 .catRight {
