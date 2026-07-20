@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Reveal } from '../Reveal'
 import { SectionHeading } from '../SectionHeading/SectionHeading'
@@ -10,9 +10,24 @@ const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
+const MAX_EXTRA_CATS = 4
+const ORDINALI = ['secondo', 'terzo', 'quarto', 'quinto'] as const
+
 function ContactForm() {
   const purr = usePurr()
   const [status, setStatus] = useState<FormStatus>('idle')
+
+  // Gatti aggiuntivi: id monotòno via ref così le key React restano stabili
+  // anche dopo una rimozione (niente indici come key su una lista mutabile).
+  const nextCatId = useRef(0)
+  const [extraCats, setExtraCats] = useState<number[]>([])
+
+  const addCat = () =>
+    setExtraCats((prev) =>
+      prev.length < MAX_EXTRA_CATS ? [...prev, nextCatId.current++] : prev,
+    )
+  const removeCat = (id: number) =>
+    setExtraCats((prev) => prev.filter((catId) => catId !== id))
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -69,7 +84,10 @@ function ContactForm() {
           <button
             type="button"
             className={styles.resetBtn}
-            onClick={() => setStatus('idle')}
+            onClick={() => {
+              setStatus('idle')
+              setExtraCats([])
+            }}
           >
             Invia un altro messaggio
           </button>
@@ -110,6 +128,36 @@ function ContactForm() {
         Il nome del gatto (il vero cliente)
         <input className={styles.input} type="text" name="gatto" required placeholder="es. Daisy" />
       </label>
+
+      {extraCats.map((id, i) => (
+        <div className={styles.extraCat} key={id}>
+          <label className={styles.field}>
+            Il nome del {ORDINALI[i]} gatto
+            <input
+              className={styles.input}
+              type="text"
+              name={`gatto${i + 2}`}
+              required
+              placeholder="es. Briciola"
+            />
+          </label>
+          <button
+            type="button"
+            className={styles.removeCatBtn}
+            onClick={() => removeCat(id)}
+            aria-label={`Rimuovi il ${ORDINALI[i]} gatto`}
+          >
+            ×
+          </button>
+        </div>
+      ))}
+
+      {extraCats.length < MAX_EXTRA_CATS && (
+        <button type="button" className={styles.addCatBtn} onClick={addCat}>
+          Ho anche un altro micetto 🐾
+        </button>
+      )}
+
       <label className={styles.field}>
         Messaggio
         <textarea

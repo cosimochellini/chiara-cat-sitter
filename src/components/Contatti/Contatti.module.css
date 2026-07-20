@@ -87,6 +87,53 @@
   animation: none;
 }
 
+.extraCat {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.extraCat .field {
+  flex: 1;
+}
+
+.removeCatBtn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--rosa-bordo);
+  border-radius: 14px;
+  background: #fff9fb;
+  color: var(--rosa-deep);
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.removeCatBtn:hover {
+  border-color: var(--rosa);
+  color: var(--rosa);
+}
+
+.addCatBtn {
+  align-self: flex-start;
+  background: none;
+  border: 2px solid var(--rosa);
+  color: var(--rosa-deep);
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.addCatBtn:hover {
+  background: var(--rosa);
+  color: #ffffff;
+}
+
 .honeypot {
   display: none;
 }
