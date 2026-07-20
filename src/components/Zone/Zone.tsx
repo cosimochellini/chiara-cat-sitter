@@ -8,7 +8,7 @@ const ZONES = [
   { name: 'Soffiano', variant: styles.zPink },
   { name: 'Isolotto', variant: styles.zPurple },
   { name: 'Legnaia', variant: styles.zGold },
-  { name: 'Bagnese', variant: styles.zPink },
+  { name: 'Le Bagnese', variant: styles.zPink },
   { name: 'Casellina', variant: styles.zPurple },
   { name: 'Scandicci', variant: styles.zGold },
   { name: 'San Frediano', variant: styles.zPink },

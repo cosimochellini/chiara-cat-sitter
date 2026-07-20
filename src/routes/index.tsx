@@ -3,6 +3,7 @@ import { Nav } from '../components/Nav/Nav'
 import { Hero } from '../components/Hero/Hero'
 import { ChiSono } from '../components/ChiSono/ChiSono'
 import { Servizi } from '../components/Servizi/Servizi'
+import { Manifesto } from '../components/Manifesto/Manifesto'
 import { Zone } from '../components/Zone/Zone'
 import { Recensioni } from '../components/Recensioni/Recensioni'
 import { Contatti } from '../components/Contatti/Contatti'
@@ -22,6 +23,7 @@ function Home() {
       <main>
         <ChiSono />
         <Servizi />
+        <Manifesto />
         <Zone />
         <Recensioni />
         <Contatti />

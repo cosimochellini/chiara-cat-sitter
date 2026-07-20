@@ -68,6 +68,8 @@
   font-family: 'Baloo 2', cursive;
   font-weight: 700;
   font-size: 22px;
+  line-height: 1.2;
+  min-height: 2.4em;
   color: var(--testo-scuro);
   margin: 0;
 }
