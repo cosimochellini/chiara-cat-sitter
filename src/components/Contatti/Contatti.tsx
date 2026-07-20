@@ -20,6 +20,10 @@ function ContactForm() {
 
     if (!ACCESS_KEY) {
       // Access key mancante (env var non configurata): evita una POST inutile.
+      // Diagnostica per l'operatore: distingue il misconfig di deploy da un errore utente.
+      console.error(
+        'VITE_WEB3FORMS_ACCESS_KEY non configurata: il form contatti non può inviare. Impostala in .env e nelle env di Netlify.',
+      )
       setStatus('error')
       return
     }
