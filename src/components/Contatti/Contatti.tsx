@@ -10,9 +10,11 @@ const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
-const MAX_EXTRA_CATS = 4
 const ORDINALI = ['secondo', 'terzo', 'quarto', 'quinto'] as const
 const PLACEHOLDER_GATTI = ['es. Briciola', 'es. Oscar', 'es. Misa', 'es. Kiki'] as const
+// La label ordinale è l'unico limite reale al numero di gatti extra: derivane
+// il cap così cap e tabella non possono divergere silenziosamente.
+const MAX_EXTRA_CATS = ORDINALI.length
 
 function ContactForm() {
   const purr = usePurr()
@@ -23,10 +25,13 @@ function ContactForm() {
   const nextCatId = useRef(0)
   const [extraCats, setExtraCats] = useState<number[]>([])
 
-  const addCat = () =>
-    setExtraCats((prev) =>
-      prev.length < MAX_EXTRA_CATS ? [...prev, nextCatId.current++] : prev,
-    )
+  const addCat = () => {
+    if (extraCats.length >= MAX_EXTRA_CATS) return
+    // Id generato nell'handler (non nell'updater) così setExtraCats resta puro:
+    // sotto StrictMode l'updater può girare due volte, l'handler no.
+    const id = nextCatId.current++
+    setExtraCats((prev) => [...prev, id])
+  }
   const removeCat = (id: number) =>
     setExtraCats((prev) => prev.filter((catId) => catId !== id))
 

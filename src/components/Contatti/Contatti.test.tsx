@@ -115,6 +115,38 @@ describe('Contatti', () => {
     expect(init.body.get('gatto2')).toBe('Briciola')
   })
 
+  it('re-indexes the payload contiguously after removing a middle cat', async () => {
+    const fetchMock = vi.fn(async () => ({ json: async () => ({ success: true }) }))
+    vi.stubGlobal('fetch', fetchMock)
+    const user = userEvent.setup()
+
+    render(<Contatti />)
+    await fillForm(user)
+
+    // Tre gatti extra: secondo, terzo, quarto.
+    for (let i = 0; i < 3; i++) {
+      await user.click(screen.getByRole('button', { name: 'Ho anche un altro micetto' }))
+    }
+    await user.type(screen.getByLabelText('Il nome del secondo gatto'), 'Briciola')
+    await user.type(screen.getByLabelText('Il nome del terzo gatto'), 'Oscar')
+    await user.type(screen.getByLabelText('Il nome del quarto gatto'), 'Misa')
+
+    // Rimuovo quello centrale: i valori superstiti restano (input keyed by id
+    // stabile) e i name si ricompattano su gatto2/gatto3.
+    await user.click(screen.getByRole('button', { name: 'Rimuovi il terzo gatto' }))
+    await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))
+
+    await screen.findByRole('status')
+    const [, init] = fetchMock.mock.calls[0] as unknown as [
+      string,
+      { body: FormData },
+    ]
+    expect(init.body.get('gatto')).toBe('Daisy')
+    expect(init.body.get('gatto2')).toBe('Briciola')
+    expect(init.body.get('gatto3')).toBe('Misa')
+    expect(init.body.get('gatto4')).toBeNull()
+  })
+
   it('logs an error and shows the error state when the access key is missing', async () => {
     vi.stubEnv('VITE_WEB3FORMS_ACCESS_KEY', '')
     const consoleError = vi.spyOn(console, 'error').mockImplementation(() => {})
