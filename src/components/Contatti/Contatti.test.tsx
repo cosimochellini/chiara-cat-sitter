@@ -10,7 +10,7 @@ async function fillForm(user: ReturnType<typeof userEvent.setup>) {
   await user.type(screen.getByLabelText('Il tuo nome'), 'Martina')
   await user.type(screen.getByLabelText('La tua email'), 'martina@esempio.it')
   await user.type(screen.getByLabelText('Il tuo telefono'), '333 123 4567')
-  await user.type(screen.getByLabelText('Il nome del gatto (il vero cliente)'), 'Polpetta')
+  await user.type(screen.getByLabelText('Il nome del gatto (il vero cliente)'), 'Daisy')
   await user.type(screen.getByLabelText('Messaggio'), 'Ciao!')
 }
 
