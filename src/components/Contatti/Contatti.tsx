@@ -7,7 +7,6 @@ import { usePurr } from '../../behaviors/usePurr'
 import styles from './Contatti.module.css'
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
@@ -18,7 +17,10 @@ function ContactForm() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    if (!ACCESS_KEY) {
+    // Letta al submit (non a livello di modulo) così è testabile via vi.stubEnv.
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+
+    if (!accessKey) {
       // Access key mancante (env var non configurata): evita una POST inutile.
       // Diagnostica per l'operatore: distingue il misconfig di deploy da un errore utente.
       console.error(
@@ -31,7 +33,7 @@ function ContactForm() {
     setStatus('sending')
 
     const formData = new FormData(event.currentTarget)
-    formData.append('access_key', ACCESS_KEY)
+    formData.append('access_key', accessKey)
 
     try {
       const response = await fetch(WEB3FORMS_ENDPOINT, {
