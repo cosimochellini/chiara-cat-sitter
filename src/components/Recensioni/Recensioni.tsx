@@ -24,7 +24,7 @@ type Review = {
 
 const REVIEWS: Review[] = [
   {
-    id: 'polpetta',
+    id: 'daisy',
     name: 'Daisy',
     breed: 'europea tigrata, critica gastronomica',
     rating: 5,
@@ -37,7 +37,7 @@ const REVIEWS: Review[] = [
     cat: { fur: '#EFBE8A', eyes: 'open', stripes: true, stripeColor: '#C98D4B', whiskers: true, feet: true, accessory: 'heartbib', accessoryColor: '#D93A5F' },
   },
   {
-    id: 'nuvola',
+    id: 'trudy',
     name: 'Trudy',
     breed: 'persiana, di sangue reale',
     rating: 5,
@@ -50,7 +50,7 @@ const REVIEWS: Review[] = [
     cat: { fur: '#FFFDFB', eyes: 'open', whiskers: true, feet: true, accessory: 'crown', accessoryColor: '#F7C86B' },
   },
   {
-    id: 'attila',
+    id: 'briciola',
     name: 'Briciola',
     breed: 'nera, ex randagia di quartiere',
     rating: 5,
@@ -63,7 +63,7 @@ const REVIEWS: Review[] = [
     cat: { fur: '#5A525E', stroke: '#332D36', eyes: 'slit', whiskers: true, whiskerColor: '#A79FB0', feet: true },
   },
   {
-    id: 'gino',
+    id: 'oscar',
     name: 'Oscar',
     breed: 'rosso, esperto di pisolini',
     rating: 5,
@@ -76,7 +76,7 @@ const REVIEWS: Review[] = [
     cat: { fur: '#F2A65A', eyes: 'closed', stripes: true, stripeColor: '#D97F2E', whiskers: true, feet: true, accessory: 'bandana', accessoryColor: '#7ACB96' },
   },
   {
-    id: 'sushi',
+    id: 'misa',
     name: 'Misa',
     breed: 'siamese, opinionista',
     rating: 4,
@@ -89,7 +89,7 @@ const REVIEWS: Review[] = [
     cat: { fur: '#8A6A4F', earInner: '#C9A176', faceFill: '#F7EBD7', muzzle: '#E3CBA4', eyes: 'glasses', whiskers: true, feet: true },
   },
   {
-    id: 'briciola',
+    id: 'kiki',
     name: 'Kiki',
     breed: 'gattina timida, esperta di sotto-divani',
     rating: 5,
@@ -102,7 +102,7 @@ const REVIEWS: Review[] = [
     cat: { fur: '#CFC5DF', eyes: 'open', whiskers: true, feet: true, accessory: 'sparkles' },
   },
   {
-    id: 'maradona',
+    id: 'casimiro',
     name: 'Casimiro',
     breed: 'soriano, atleta professionista',
     rating: 5,
