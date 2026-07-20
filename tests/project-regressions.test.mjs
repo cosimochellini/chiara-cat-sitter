@@ -51,6 +51,34 @@ test('keeps contact controls large enough to avoid iOS focus zoom', async () => 
   )
 })
 
+test('submits the contact form to Web3Forms and drops personal data', async () => {
+  const contact = await readProjectFile(
+    'src/components/Contatti/Contatti.tsx',
+  )
+
+  // Il form invia davvero a Web3Forms con la access key da env var.
+  assert.match(contact, /https:\/\/api\.web3forms\.com\/submit/)
+  assert.match(contact, /import\.meta\.env\.VITE_WEB3FORMS_ACCESS_KEY/)
+
+  // Nuovi campi richiesti dall'utente.
+  assert.match(contact, /name="email"/)
+  assert.match(contact, /name="telefono"/)
+
+  // Nessun recapito personale/placeholder residuo nella sezione.
+  assert.doesNotMatch(contact, /wa\.me/)
+  assert.doesNotMatch(contact, /055 123 4567/)
+  assert.doesNotMatch(contact, /ciao@chiaracatsitter\.it/)
+})
+
+test('keeps personal contact data out of the root JSON-LD', async () => {
+  const root = await readProjectFile('src/routes/__root.tsx')
+
+  assert.doesNotMatch(root, /telephone:/)
+  assert.doesNotMatch(root, /email:\s*BUSINESS/)
+  assert.doesNotMatch(root, /055 123 4567/)
+  assert.doesNotMatch(root, /ciao@chiaracatsitter\.it/)
+})
+
 test('disables smooth scrolling for reduced-motion users', async () => {
   const globalStyles = await readProjectFile('src/styles/global.css')
   const reducedMotionStyles = globalStyles.slice(

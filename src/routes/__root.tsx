@@ -19,11 +19,10 @@ const DESCRIPTION =
 const OG_IMAGE = `${SITE_URL}/og-image.png`
 const CANONICAL = `${SITE_URL}/`
 
-// NOTA: recapiti/zona di esempio, allineati a src/components/Contatti/Contatti.tsx
-// e src/components/Zone/Zone.tsx. Sostituire con i dati reali di Chiara.
+// NOTA: zona di esempio, allineata a src/components/Zone/Zone.tsx.
+// Sostituire con i dati reali di Chiara. Nessun recapito personale (telefono/email):
+// i contatti passano solo dal form Web3Forms in src/components/Contatti/Contatti.tsx.
 const BUSINESS = {
-  telefono: '+39 055 123 4567',
-  email: 'ciao@chiaracatsitter.it',
   citta: 'Firenze',
   regione: 'Toscana',
   lat: 43.7825,
@@ -49,8 +48,6 @@ const JSON_LD = {
   description: DESCRIPTION,
   url: CANONICAL,
   image: OG_IMAGE,
-  telephone: BUSINESS.telefono,
-  email: BUSINESS.email,
   priceRange: '€€',
   address: {
     '@type': 'PostalAddress',
