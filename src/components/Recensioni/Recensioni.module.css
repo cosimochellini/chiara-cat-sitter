@@ -85,12 +85,6 @@
   display: contents;
 }
 
-.breed {
-  font-size: 13.5px;
-  font-style: italic;
-  color: var(--testo-tenue);
-}
-
 .quote {
   margin: 0;
   font-size: 15px;
@@ -128,9 +122,6 @@
   .quote {
     font-size: 13.5px;
     line-height: 1.5;
-  }
-  .breed {
-    font-size: 12px;
   }
   .tape {
     width: 60px;

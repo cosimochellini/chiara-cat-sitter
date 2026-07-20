@@ -7,7 +7,6 @@ import styles from './Recensioni.module.css'
 type Review = {
   id: string
   name: string
-  breed: string
   rating: number
   quote: string
   photoBg: string
@@ -20,7 +19,6 @@ const REVIEWS: Review[] = [
   {
     id: 'daisy',
     name: 'Daisy',
-    breed: 'rossa tigrata, sorella chiacchierona',
     rating: 4,
     quote:
       'l’unica sorella simpatica (Trudy non la sopporto). con lei chiacchieriamo di tante cose e abbiamo i nostri rituali personali. 4 zampette perchè non le perdono di essere andata a vivere da sola',
@@ -32,7 +30,6 @@ const REVIEWS: Review[] = [
   {
     id: 'trudy',
     name: 'Trudy',
-    breed: 'tigrata, la sorellona maestosa',
     rating: 4,
     quote:
       'la mia sorellona, con lei sbavo dalle fusa che faccio ogni volta che la vedo. 4 zampette perchè non le perdono di essere andata a vivere da sola',
@@ -44,7 +41,6 @@ const REVIEWS: Review[] = [
   {
     id: 'briciola',
     name: 'Briciola',
-    breed: 'tigrata, veterana ammorbidita',
     rating: 5,
     quote:
       'Soffiavo sempre a tutti ma con la Chiara mi sono abituata ad andare d’accordo anche con gli umani diversi da babbo mamma e Franci. O forse è stata solo la vecchiaia?',
@@ -56,7 +52,6 @@ const REVIEWS: Review[] = [
   {
     id: 'oscar',
     name: 'Oscar',
-    breed: 'bianco e tigrato, primo amore',
     rating: 5,
     quote:
       'Chiara è stata la mia prima cotta, ma col tempo siamo diventati amici di pappa e di giochi. Corse per la casa ovunqueeee',
@@ -68,7 +63,6 @@ const REVIEWS: Review[] = [
   {
     id: 'misa',
     name: 'Misa',
-    breed: 'crema soffice, adolescente',
     rating: 5,
     quote:
       'quando ero solo una pallina bianca di pelo e i miei erano a lavoro, c’era la Chiara a tenermi compagnia. Oggi sono cresciuta e come ogni adolescente non sono più disposta a stare ore a farmi grattare il pancino. Certo che però 5 minuti....',
@@ -80,7 +74,6 @@ const REVIEWS: Review[] = [
   {
     id: 'kiki',
     name: 'Kiki',
-    breed: 'nera, ospite lampo',
     rating: 5,
     quote:
       'Tecnica di apertura scatolette impeccabile. Grattini dietro le orecchie a livello olimpico. La riassumerei anche subito, peccato siano stati solo pochi giorni',
@@ -92,7 +85,6 @@ const REVIEWS: Review[] = [
   {
     id: 'casimiro',
     name: 'Casimiro',
-    breed: 'soriano, atleta professionista',
     rating: 5,
     quote:
       'Lanci di pallina di una precisione commovente. Sessioni laser da standing ovation. Il mio allenatore di fiducia.',
@@ -145,7 +137,6 @@ export function Recensioni() {
                   />
                 </div>
                 <figcaption className={styles.caption}>
-                  <span className={styles.breed}>{review.breed}</span>
                   <PawRating value={review.rating} label={`${review.rating} zampette su 5`} />
                   <blockquote className={styles.quote}>{review.quote}</blockquote>
                 </figcaption>
