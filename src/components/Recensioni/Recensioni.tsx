@@ -25,8 +25,8 @@ type Review = {
 const REVIEWS: Review[] = [
   {
     id: 'polpetta',
-    name: 'Polpetta',
-    breed: 'europeo tigrato, critico gastronomico',
+    name: 'Daisy',
+    breed: 'europea tigrata, critica gastronomica',
     rating: 5,
     quote:
       '«Tecnica di apertura scatolette impeccabile. Grattini dietro le orecchie a livello olimpico. La riassumerei anche subito.»',
@@ -38,7 +38,7 @@ const REVIEWS: Review[] = [
   },
   {
     id: 'nuvola',
-    name: 'Principessa Nuvola',
+    name: 'Trudy',
     breed: 'persiana, di sangue reale',
     rating: 5,
     quote:
@@ -51,8 +51,8 @@ const REVIEWS: Review[] = [
   },
   {
     id: 'attila',
-    name: 'Attila',
-    breed: 'nero, ex randagio di quartiere',
+    name: 'Briciola',
+    breed: 'nera, ex randagia di quartiere',
     rating: 5,
     quote:
       '«Io odio tutti. Lei no. Non so spiegarmelo e la cosa mi turba profondamente.»',
@@ -64,7 +64,7 @@ const REVIEWS: Review[] = [
   },
   {
     id: 'gino',
-    name: 'Gino',
+    name: 'Oscar',
     breed: 'rosso, esperto di pisolini',
     rating: 5,
     quote:
@@ -77,7 +77,7 @@ const REVIEWS: Review[] = [
   },
   {
     id: 'sushi',
-    name: 'Sushi',
+    name: 'Misa',
     breed: 'siamese, opinionista',
     rating: 4,
     quote:
@@ -90,7 +90,7 @@ const REVIEWS: Review[] = [
   },
   {
     id: 'briciola',
-    name: 'Briciola',
+    name: 'Kiki',
     breed: 'gattina timida, esperta di sotto-divani',
     rating: 5,
     quote:
@@ -103,7 +103,7 @@ const REVIEWS: Review[] = [
   },
   {
     id: 'maradona',
-    name: 'Maradona',
+    name: 'Casimiro',
     breed: 'soriano, atleta professionista',
     rating: 5,
     quote:

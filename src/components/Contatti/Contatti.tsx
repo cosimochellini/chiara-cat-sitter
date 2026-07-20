@@ -139,7 +139,7 @@ function ContactForm() {
         onMouseEnter={purr}
         disabled={sending}
       >
-        {sending ? 'Invio… 🐾' : 'Manda un miao 🐾'}
+        {sending ? 'Invio… 🐾' : 'Inviami il messaggio 🐾'}
       </button>
 
       {status === 'error' && (
