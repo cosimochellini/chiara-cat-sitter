@@ -21,6 +21,20 @@ web app.
 - **Node 24.18.0** (vedi `.nvmrc`: `nvm install && nvm use`)
 - **pnpm 11.14.0 standalone**, fissato in `package.json`
 
+## Variabili d'ambiente
+
+Il form contatti invia tramite [Web3Forms](https://web3forms.com). Copia
+`.env.example` in `.env` e imposta la access key pubblica:
+
+```bash
+cp .env.example .env
+# VITE_WEB3FORMS_ACCESS_KEY=<la-tua-access-key>
+```
+
+Senza la chiave il form mostra solo il messaggio d'errore. In produzione la
+stessa variabile va impostata nelle *Environment variables* di Netlify (Vite la
+inlinea a build-time).
+
 ## Comandi
 
 ```bash
@@ -49,10 +63,10 @@ src/
 
 ## Contenuti
 
-I recapiti in `src/components/Contatti/Contatti.tsx` (telefono, email, WhatsApp)
-sono **valori di esempio** relativi a Firenze: vanno sostituiti con quelli reali
-di Chiara. Anche la sezione "Chi sono" contiene dettagli d'esempio (anni di
-esperienza, zone).
+La sezione Contatti non mostra recapiti personali: offre solo il form
+(collegato a Web3Forms, vedi *Variabili d'ambiente*). La sezione "Chi sono" e
+le zone di servizio contengono ancora dettagli d'esempio da sostituire con
+quelli reali di Chiara.
 
 ## Accessibilità e animazioni
 

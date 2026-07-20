@@ -17,6 +17,13 @@ function ContactForm() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    if (!ACCESS_KEY) {
+      // Access key mancante (env var non configurata): evita una POST inutile.
+      setStatus('error')
+      return
+    }
+
     setStatus('sending')
 
     const formData = new FormData(event.currentTarget)
