@@ -10,11 +10,15 @@ const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
-const ORDINALI = ['secondo', 'terzo', 'quarto', 'quinto'] as const
-const PLACEHOLDER_GATTI = ['es. Briciola', 'es. Oscar', 'es. Misa', 'es. Kiki'] as const
-// La label ordinale è l'unico limite reale al numero di gatti extra: derivane
-// il cap così cap e tabella non possono divergere silenziosamente.
-const MAX_EXTRA_CATS = ORDINALI.length
+// Unica fonte di verità per i gatti extra: ordinale (label/aria) + placeholder
+// nella stessa riga, così non possono disallinearsi. Il cap ne deriva.
+const GATTI_EXTRA = [
+  { ordinale: 'secondo', placeholder: 'es. Briciola' },
+  { ordinale: 'terzo', placeholder: 'es. Oscar' },
+  { ordinale: 'quarto', placeholder: 'es. Misa' },
+  { ordinale: 'quinto', placeholder: 'es. Kiki' },
+] as const
+const MAX_EXTRA_CATS = GATTI_EXTRA.length
 
 function ContactForm() {
   const purr = usePurr()
@@ -138,20 +142,20 @@ function ContactForm() {
       {extraCats.map((id, i) => (
         <div className={styles.extraCat} key={id}>
           <label className={styles.field}>
-            Il nome del {ORDINALI[i]} gatto
+            Il nome del {GATTI_EXTRA[i].ordinale} gatto
             <input
               className={styles.input}
               type="text"
               name={`gatto${i + 2}`}
               required
-              placeholder={PLACEHOLDER_GATTI[i]}
+              placeholder={GATTI_EXTRA[i].placeholder}
             />
           </label>
           <button
             type="button"
             className={styles.removeCatBtn}
             onClick={() => removeCat(id)}
-            aria-label={`Rimuovi il ${ORDINALI[i]} gatto`}
+            aria-label={`Rimuovi il ${GATTI_EXTRA[i].ordinale} gatto`}
           >
             ×
           </button>
