@@ -115,6 +115,16 @@ describe('Contatti', () => {
     expect(init.body.get('gatto2')).toBe('Briciola')
   })
 
+  it('moves focus to the add button after removing an extra cat', async () => {
+    const user = userEvent.setup()
+    render(<Contatti />)
+
+    await user.click(screen.getByRole('button', { name: 'Ho anche un altro micetto' }))
+    await user.click(screen.getByRole('button', { name: 'Rimuovi il secondo gatto' }))
+
+    expect(screen.getByRole('button', { name: 'Ho anche un altro micetto' })).toHaveFocus()
+  })
+
   it('re-indexes the payload contiguously after removing a middle cat', async () => {
     const fetchMock = vi.fn(async () => ({ json: async () => ({ success: true }) }))
     vi.stubGlobal('fetch', fetchMock)

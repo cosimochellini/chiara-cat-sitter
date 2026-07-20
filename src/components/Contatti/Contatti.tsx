@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Reveal } from '../Reveal'
 import { SectionHeading } from '../SectionHeading/SectionHeading'
@@ -28,6 +28,10 @@ function ContactForm() {
   // anche dopo una rimozione (niente indici come key su una lista mutabile).
   const nextCatId = useRef(0)
   const [extraCats, setExtraCats] = useState<number[]>([])
+  const addCatRef = useRef<HTMLButtonElement>(null)
+  // Rimuovere una riga smonta l'elemento con il focus, che cadrebbe su <body>.
+  // Segnaliamo di spostare il focus sul bottone "aggiungi" dopo il re-render.
+  const focusAddAfterRemove = useRef(false)
 
   const addCat = () => {
     if (extraCats.length >= MAX_EXTRA_CATS) return
@@ -36,8 +40,20 @@ function ContactForm() {
     const id = nextCatId.current++
     setExtraCats((prev) => [...prev, id])
   }
-  const removeCat = (id: number) =>
+  const removeCat = (id: number) => {
+    focusAddAfterRemove.current = true
     setExtraCats((prev) => prev.filter((catId) => catId !== id))
+  }
+
+  // Sincronizza il focus col DOM dopo una rimozione (sistema esterno: nessun
+  // valore da derivare nel render). Il bottone "aggiungi" è sempre presente
+  // dopo una rimozione perché il conteggio scende sotto il cap.
+  useEffect(() => {
+    if (focusAddAfterRemove.current) {
+      focusAddAfterRemove.current = false
+      addCatRef.current?.focus()
+    }
+  }, [extraCats])
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -163,7 +179,12 @@ function ContactForm() {
       ))}
 
       {extraCats.length < MAX_EXTRA_CATS && (
-        <button type="button" className={styles.addCatBtn} onClick={addCat}>
+        <button
+          type="button"
+          className={styles.addCatBtn}
+          onClick={addCat}
+          ref={addCatRef}
+        >
           Ho anche un altro micetto
         </button>
       )}
