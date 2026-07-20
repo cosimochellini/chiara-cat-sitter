@@ -11,7 +11,9 @@
     "dev": "vite dev",
     "build": "vite build",
     "start": "node .output/server/index.mjs",
-    "test": "node --test",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "doctor": "react-doctor"
@@ -26,19 +28,25 @@
     "@babel/core": "^8.0.1",
     "@eslint/js": "^10.0.1",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
+    "@vitest/coverage-v8": "^4.1.10",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.7.0",
     "eslint-plugin-react-doctor": "^0.7.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.7.0",
+    "jsdom": "^29.1.1",
     "react-doctor": "^0.7.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.63.0",
-    "vite": "^8.1.4"
+    "vite": "^8.1.4",
+    "vitest": "^4.1.10"
   }
 }

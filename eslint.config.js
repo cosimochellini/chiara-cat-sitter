@@ -12,6 +12,7 @@ export default tseslint.config(
       '.nitro',
       '.tanstack',
       'dist',
+      'coverage',
       'node_modules',
       'src/routeTree.gen.ts',
     ],
@@ -36,6 +37,14 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       ...reactDoctor.configs.recommended.rules,
       ...reactDoctor.configs['tanstack-start'].rules,
+    },
+  },
+  {
+    // I test (Vitest + Testing Library) e il setup accedono anche ai global di
+    // Node (readFile, ecc.) oltre a quelli browser.
+    files: ['tests/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
+    languageOptions: {
+      globals: { ...globals.browser, ...globals.node },
     },
   },
 )
