@@ -60,6 +60,13 @@ function ContactForm() {
           <p className={styles.successText}>
             Ti rispondo prestissimo — il tempo di finire questi grattini.
           </p>
+          <button
+            type="button"
+            className={styles.resetBtn}
+            onClick={() => setStatus('idle')}
+          >
+            Invia un altro messaggio
+          </button>
         </div>
       </div>
     )

@@ -120,6 +120,18 @@
   max-width: 320px;
 }
 
+.resetBtn {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  color: var(--rosa-deep);
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .tagline {
   text-align: center;
   font-family: 'Baloo 2', cursive;
