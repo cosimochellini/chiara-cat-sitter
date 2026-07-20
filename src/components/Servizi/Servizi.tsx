@@ -93,12 +93,12 @@ type Servizio = {
 }
 
 const SERVIZI: Servizio[] = [
-  { id: 'coccole', title: 'Missione Coccole', desc: 'Visite a domicilio: pappa, acqua fresca, compagnia e coccole a casa del gatto, nel suo regno.', border: styles.bRosa, circle: styles.cRosa, Icon: IconCoccole },
+  { id: 'coccole', title: 'Missione Pappa', desc: 'Visite a domicilio: pappa, acqua fresca, compagnia e coccole a casa del gatto, nel suo regno.', border: styles.bRosa, circle: styles.cRosa, Icon: IconCoccole },
   { id: 'lettiera', title: 'Operazione Lettiera Scintillante', desc: 'Pulizia completa della lettiera a ogni visita. Sabbia fresca, zero odori, zampe felici.', border: styles.bViola, circle: styles.cViola, Icon: IconLettiera },
   { id: 'laser', title: 'Sessioni Gioco & Laser', desc: 'Gioco attivo su misura: pallina, piumino e laser per tenere il micio in forma e di buon umore.', border: styles.bVerde, circle: styles.cVerde, Icon: IconLaser },
   { id: 'medicine', title: 'Medicine con Dolcezza', desc: 'Somministrazione di farmaci e attenzioni speciali per gatti anziani, timidi o con esigenze particolari.', border: styles.bRosa, circle: styles.cRosa, Icon: IconMedicine },
-  { id: 'giornalino', title: 'Miao-Giornalino Quotidiano', desc: 'Dopo ogni visita ricevi un report con foto e video: sai sempre come sta (e quanto è bello).', border: styles.bViola, circle: styles.cOro, Icon: IconGiornalino },
-  { id: 'premium', title: 'Coccole Premium', desc: 'Grattini certificati, spazzolate rilassanti e siesta condivisa. Il pacchetto VIP: Very Important Pet.', border: styles.bVerde, circle: styles.cRosa, Icon: IconPremium },
+  { id: 'giornalino', title: 'Miao-Giornalino Quotidiano', desc: 'Dopo ogni visita ricevi un report con foto o video: sai sempre come sta (e quanto è bello).', border: styles.bViola, circle: styles.cOro, Icon: IconGiornalino },
+  { id: 'premium', title: 'Coccole Premium', desc: 'Grattini certificati, spazzolate rilassanti. Il pacchetto VIP: Very Important Pet.', border: styles.bVerde, circle: styles.cRosa, Icon: IconPremium },
 ]
 
 export function Servizi() {

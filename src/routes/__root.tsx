@@ -32,7 +32,7 @@ const BUSINESS = {
     'Soffiano',
     'Isolotto',
     'Legnaia',
-    'Bagnese',
+    'Le Bagnese',
     'Casellina',
     'Scandicci',
     'San Frediano',

@@ -223,8 +223,8 @@ export function ChiSono() {
           </p>
           <p className={`${styles.text} ${styles.textSpaced}`}>
             Affidabile con gli umani, irresistibile per i felini. Referenze
-            disponibili su richiesta (le loro, non le mie). Assicurata e con
-            attestato di primo soccorso felino: il tuo micio è in ottime zampe.
+            disponibili su richiesta (le loro, non le mie). Il tuo micio è in
+            ottime zampe.
           </p>
 
           <div
