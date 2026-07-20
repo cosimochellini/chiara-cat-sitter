@@ -44,7 +44,7 @@ describe('Contatti', () => {
     render(<Contatti />)
 
     expect(
-      screen.getByRole('button', { name: 'Ho anche un altro micetto 🐾' }),
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
     ).toBeVisible()
   })
 
@@ -53,7 +53,7 @@ describe('Contatti', () => {
     render(<Contatti />)
 
     await user.click(
-      screen.getByRole('button', { name: 'Ho anche un altro micetto 🐾' }),
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
     )
 
     expect(screen.getByLabelText('Il nome del secondo gatto')).toBeRequired()
@@ -64,7 +64,7 @@ describe('Contatti', () => {
     render(<Contatti />)
 
     const addBtn = () =>
-      screen.queryByRole('button', { name: 'Ho anche un altro micetto 🐾' })
+      screen.queryByRole('button', { name: 'Ho anche un altro micetto' })
 
     for (let i = 0; i < 4; i++) {
       await user.click(addBtn()!)
@@ -81,7 +81,7 @@ describe('Contatti', () => {
 
     for (let i = 0; i < 4; i++) {
       await user.click(
-        screen.getByRole('button', { name: 'Ho anche un altro micetto 🐾' }),
+        screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
       )
     }
 
@@ -89,7 +89,7 @@ describe('Contatti', () => {
 
     expect(screen.queryByLabelText('Il nome del quinto gatto')).not.toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: 'Ho anche un altro micetto 🐾' }),
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
     ).toBeVisible()
   })
 
@@ -101,7 +101,7 @@ describe('Contatti', () => {
     render(<Contatti />)
     await fillForm(user)
     await user.click(
-      screen.getByRole('button', { name: 'Ho anche un altro micetto 🐾' }),
+      screen.getByRole('button', { name: 'Ho anche un altro micetto' }),
     )
     await user.type(screen.getByLabelText('Il nome del secondo gatto'), 'Briciola')
     await user.click(screen.getByRole('button', { name: 'Inviami il messaggio 🐾' }))

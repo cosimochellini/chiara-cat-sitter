@@ -12,6 +12,7 @@ type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
 const MAX_EXTRA_CATS = 4
 const ORDINALI = ['secondo', 'terzo', 'quarto', 'quinto'] as const
+const PLACEHOLDER_GATTI = ['es. Briciola', 'es. Oscar', 'es. Misa', 'es. Kiki'] as const
 
 function ContactForm() {
   const purr = usePurr()
@@ -138,7 +139,7 @@ function ContactForm() {
               type="text"
               name={`gatto${i + 2}`}
               required
-              placeholder="es. Briciola"
+              placeholder={PLACEHOLDER_GATTI[i]}
             />
           </label>
           <button
@@ -154,7 +155,7 @@ function ContactForm() {
 
       {extraCats.length < MAX_EXTRA_CATS && (
         <button type="button" className={styles.addCatBtn} onClick={addCat}>
-          Ho anche un altro micetto 🐾
+          Ho anche un altro micetto
         </button>
       )}
 

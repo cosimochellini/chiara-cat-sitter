@@ -117,14 +117,14 @@
 }
 
 .addCatBtn {
-  align-self: flex-start;
+  align-self: center;
   background: none;
   border: 2px solid var(--rosa);
   color: var(--rosa-deep);
   font-family: 'Baloo 2', cursive;
   font-weight: 700;
-  font-size: 15px;
-  padding: 9px 18px;
+  font-size: 13px;
+  padding: 7px 16px;
   border-radius: 999px;
   cursor: pointer;
 }
