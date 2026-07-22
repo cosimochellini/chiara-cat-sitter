@@ -196,7 +196,7 @@ function ContactForm() {
           name="messaggio"
           required
           rows={4}
-          placeholder="Date, esigenze speciali, livello di coccole richiesto…"
+          placeholder="Date, zona, esigenze speciali…"
         />
       </label>
 
